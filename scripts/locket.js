@@ -187,11 +187,14 @@ LocketMonsters = /*#__PURE__*/function () {function LocketMonsters() {_classCall
       (p, v) => p + v.monsters.length,
       0);
 
+      var totalKnown = totalToGet - totalUnknown;
 
-      var printed = 0;var _iterator4 = _createForOfIteratorHelper(
+      var monstersPrinted = 0;
+      var linesPrinted = 0;var _iterator4 = _createForOfIteratorHelper(
 
       unknown),_step4;try {for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {var group = _step4.value;
-          printed += group.monsters.length;
+          monstersPrinted += group.monsters.length;
+          linesPrinted++;
 
           if (group.monsters.length <= 3) {var _iterator5 = _createForOfIteratorHelper(
             group.monsters),_step5;try {for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {var monster = _step5.value;
@@ -205,23 +208,26 @@ LocketMonsters = /*#__PURE__*/function () {function LocketMonsters() {_classCall
 
           }
 
-          if (printed >= limit && printed + 1 < totalUnknown) {
+          if (linesPrinted >= limit && monstersPrinted + 1 < totalUnknown) {
             break;
           }
         }} catch (err) {_iterator4.e(err);} finally {_iterator4.f();}
 
-      if (totalUnknown > printed) {
-        (0,external_kolmafia_namespaceObject.print)("Skipped " + (totalUnknown - printed) + " monsters..", "gray");
+      if (totalUnknown > monstersPrinted) {
+        (0,external_kolmafia_namespaceObject.print)(
+        "Skipped " + (totalUnknown - monstersPrinted) + " monsters..",
+        "gray");
+
       }
 
       (0,external_kolmafia_namespaceObject.print)(
-      "You know " +
-      totalUnknown +
+      "You have " +
+      totalKnown +
       " / " +
       totalToGet +
-      " (And have " +
+      " (In total there are " +
       alreadyKnow.length +
-      " total in your locket)");
+      " monsters in your locket)");
 
     } }]);return LocketMonsters;}();
 
