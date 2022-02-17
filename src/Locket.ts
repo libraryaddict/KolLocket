@@ -149,11 +149,14 @@ class LocketMonsters {
       (p, v) => p + v.monsters.length,
       0
     );
+    let totalKnown: number = totalToGet - totalUnknown;
 
-    let printed: number = 0;
+    let monstersPrinted: number = 0;
+    let linesPrinted: number = 0;
 
     for (let group of unknown) {
-      printed += group.monsters.length;
+      monstersPrinted += group.monsters.length;
+      linesPrinted++;
 
       if (group.monsters.length <= 3) {
         for (let monster of group.monsters) {
@@ -167,23 +170,26 @@ class LocketMonsters {
         );
       }
 
-      if (printed >= limit && printed + 1 < totalUnknown) {
+      if (linesPrinted >= limit && monstersPrinted + 1 < totalUnknown) {
         break;
       }
     }
 
-    if (totalUnknown > printed) {
-      print("Skipped " + (totalUnknown - printed) + " monsters..", "gray");
+    if (totalUnknown > monstersPrinted) {
+      print(
+        "Skipped " + (totalUnknown - monstersPrinted) + " monsters..",
+        "gray"
+      );
     }
 
     print(
-      "You know " +
-        totalUnknown +
+      "You have " +
+        totalKnown +
         " / " +
         totalToGet +
-        " (And have " +
+        " (In total there are " +
         alreadyKnow.length +
-        " total in your locket)"
+        " monsters in your locket)"
     );
   }
 }
