@@ -12,3 +12,11 @@ Install this script with
 ```text
 svn checkout https://github.com/libraryaddict/KolLocket/branches/release/
 ```
+
+Usage is as simple as calling the script name, but you can also provide a number to limit how many lines it'll print.
+By default it will print 5 lines, the parameter is optional.
+
+```text
+locket 10
+```
+
