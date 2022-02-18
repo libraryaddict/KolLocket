@@ -7,6 +7,11 @@ import {
   toInt,
   toMonster,
   Monster,
+  printHtml,
+  urlEncode,
+  entityEncode,
+  Location,
+  getMonsters,
 } from "kolmafia";
 
 class MonsterGroup {
@@ -21,9 +26,11 @@ class LocketMonsters {
     let buffer = fileToBuffer("locket_monsters.txt");
 
     let monsters: MonsterGroup[] = [];
+    let alreadyProcessed: Monster[] = [];
 
     buffer.split(/(\n|\r)+/).forEach((line) => {
       line = line.trim();
+
       if (line.length == 0 || line.startsWith("#")) {
         return;
       }
@@ -32,9 +39,15 @@ class LocketMonsters {
 
       let monster = Monster.get(spl[0]);
 
-      if (monster == null || monster == Monster.get("None")) {
+      if (
+        monster == null ||
+        monster == Monster.get("None") ||
+        alreadyProcessed.includes(monster)
+      ) {
         return;
       }
+
+      alreadyProcessed.push(monster);
 
       let groupName = spl[1];
 
@@ -154,19 +167,57 @@ class LocketMonsters {
     let monstersPrinted: number = 0;
     let linesPrinted: number = 0;
 
+    let getLocations: (monster: Monster) => Location[] = function (
+      monster: Monster
+    ): Location[] {
+      let locations: Location[] = [];
+
+      for (let l of Location.all()) {
+        if (!getMonsters(l).includes(monster)) {
+          continue;
+        }
+
+        locations.push(l);
+      }
+
+      return locations;
+    };
+
+    let makeString: (string: String, locations: Location[]) => string =
+      function (string: String, locations: Location[]) {
+        return (
+          "<font color='gray' title='Locations: " +
+          entityEncode(locations.join(", ")) +
+          "'>" +
+          string +
+          "</font>"
+        );
+      };
+
+    print("Hover over the monsters to see locations");
+
     for (let group of unknown) {
       monstersPrinted += group.monsters.length;
       linesPrinted++;
 
-      if (group.monsters.length <= 3) {
+      if (group.groupName == null) {
         for (let monster of group.monsters) {
-          print(
-            monster + (group.groupName != null ? " @ " + group.groupName : "")
+          printHtml(
+            makeString(
+              monster +
+                (group.groupName != null ? " @ " + group.groupName : ""),
+              getLocations(monster)
+            )
           );
         }
       } else {
-        print(
-          "<" + group.monsters.length + " " + group.groupName + " monsters>"
+        printHtml(
+          "<font color='blue'>" +
+            group.groupName +
+            " Monsters:</font> " +
+            group.monsters
+              .map((monster) => makeString(monster + "", getLocations(monster)))
+              .join(", ")
         );
       }
 
@@ -182,18 +233,23 @@ class LocketMonsters {
       );
     }
 
+    let totalMonsters: number = Monster.all().filter(
+      (m) => m.copyable && !m.boss
+    ).length;
+
     print(
       "You have " +
         totalKnown +
         " / " +
         totalToGet +
-        " (In total there are " +
+        ". Including every monster possible, you have " +
         alreadyKnow.length +
-        " monsters in your locket)"
+        " / " +
+        totalMonsters
     );
   }
 }
 
-export function main(limit: string = "5") {
+export function main(limit: string = "10") {
   new LocketMonsters().printLocket(toInt(limit));
 }
