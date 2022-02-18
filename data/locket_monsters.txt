@@ -8,12 +8,6 @@ screambat
 beanbat
 Baa'baa'bu'ran
 
-Green Ops Soldier
-oil cartel
-Lobsterfrogman
-War Frat Mobile Grill Unit
-Swarm of Ghuol Whelps
-
 Lynyrd Skinner
 forest spirit
 dairy goat
@@ -24,15 +18,59 @@ Stumbling-drunk congoer (female)
 Stumbling-drunk congoer (male)
 Bram the Stoker
 
+Green Ops Soldier	In Run
+oil cartel	In Run
+Lobsterfrogman	In Run
+War Frat Mobile Grill Unit	In Run
+Swarm of Ghuol Whelps	In Run
+
 biker	Neverending Party
 burnout	Neverending Party
 jock	Neverending Party
 party girl	Neverending Party
 "plain" girl	Neverending Party
 
-kid who is too old to be Trick-or-Treating
-suburban security civilian 
-vandal kid
+kid who is too old to be Trick-or-Treating	Halloween
+suburban security civilian	Halloween
+vandal kid	Halloween
+
+creepy clown	Goo, Robot
+Knob Goblin Elite Guard	Goo, Robot
+Knob Goblin Harem Girl	Goo, Robot
+Cobb's Knob oven	Goo, Robot
+Knob Goblin Alchemist	Goo, Robot
+Knob Goblin MBA	Goo, Robot
+pine bat	Goo, Robot
+suckubus	Goo, Robot
+Ninja Snowman Weaponmaster	Goo, Robot
+crêep	Goo, Robot
+Carnivorous Moxie Weed	Goo, Robot
+raging bull	Goo, Robot
+Spectral Jellyfish	Goo, Robot
+ratbat	Goo, Robot
+beanbat	Goo, Robot
+black panther	Goo, Robot
+fan dancer	Goo, Robot
+mind flayer	Goo, Robot
+eXtreme cross-country hippy	Goo, Robot
+drunk goat	Goo, Robot
+malevolent hair clog	Goo, Robot
+animated ornate nightstand	Goo, Robot
+pooltergeist	Goo, Robot
+anglerbush	Goo, Robot
+cubist bull	Goo, Robot
+jacob's adder	Goo, Robot
+spooky music box	Goo, Robot
+Pr Imp	Goo, Robot
+junksprite bender	Goo, Robot
+sewer snake with a sewer snake in it	Goo, Robot
+remaindered skeleton	Goo, Robot
+smut orc screwer	Goo, Robot
+spooky vampire	Goo, Robot
+lihc	Goo, Robot
+white lion	Goo, Robot
+ghost miner	Goo, Robot
+1335 HaXx0r	Goo, Robot
 
 Black Crayon Beast	Black Crayon
 Black Crayon Beetle	Black Crayon

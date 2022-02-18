@@ -59,9 +59,11 @@ LocketMonsters = /*#__PURE__*/function () {function LocketMonsters() {_classCall
       var buffer = (0,external_kolmafia_namespaceObject.fileToBuffer)("locket_monsters.txt");
 
       var monsters = [];
+      var alreadyProcessed = [];
 
       buffer.split(/(\n|\r)+/).forEach((line) => {
         line = line.trim();
+
         if (line.length == 0 || line.startsWith("#")) {
           return;
         }
@@ -70,9 +72,15 @@ LocketMonsters = /*#__PURE__*/function () {function LocketMonsters() {_classCall
 
         var monster = external_kolmafia_namespaceObject.Monster.get(spl[0]);
 
-        if (monster == null || monster == external_kolmafia_namespaceObject.Monster.get("None")) {
+        if (
+        monster == null ||
+        monster == external_kolmafia_namespaceObject.Monster.get("None") ||
+        alreadyProcessed.includes(monster))
+        {
           return;
         }
+
+        alreadyProcessed.push(monster);
 
         var groupName = spl[1];
 
@@ -104,12 +112,12 @@ LocketMonsters = /*#__PURE__*/function () {function LocketMonsters() {_classCall
       var _iterator = _createForOfIteratorHelper((0,external_kolmafia_namespaceObject.getProperty)("_locketMonstersFought").
       split(",").
       filter((m) => m.match(/[0-9]+/)).
-      map((m) => (0,external_kolmafia_namespaceObject.toMonster)((0,external_kolmafia_namespaceObject.toInt)(m)))),_step;try {for (_iterator.s(); !(_step = _iterator.n()).done;) {var monster = _step.value;
-          if (locketMonsters.includes(monster)) {
+      map((m) => (0,external_kolmafia_namespaceObject.toMonster)((0,external_kolmafia_namespaceObject.toInt)(m)))),_step;try {for (_iterator.s(); !(_step = _iterator.n()).done;) {var _monster = _step.value;
+          if (locketMonsters.includes(_monster)) {
             continue;
           }
 
-          locketMonsters.push(monster);
+          locketMonsters.push(_monster);
         }} catch (err) {_iterator.e(err);} finally {_iterator.f();}
 
       var savedLocketMonsters = (0,external_kolmafia_namespaceObject.getProperty)(this.propertyName).
@@ -190,28 +198,66 @@ LocketMonsters = /*#__PURE__*/function () {function LocketMonsters() {_classCall
       var totalKnown = totalToGet - totalUnknown;
 
       var monstersPrinted = 0;
-      var linesPrinted = 0;var _iterator4 = _createForOfIteratorHelper(
+      var linesPrinted = 0;
 
-      unknown),_step4;try {for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {var group = _step4.value;
+      var getLocations = function getLocations(
+      monster)
+      {
+        var locations = [];var _iterator4 = _createForOfIteratorHelper(
+
+        external_kolmafia_namespaceObject.Location.all()),_step4;try {for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {var l = _step4.value;
+            if (!(0,external_kolmafia_namespaceObject.getMonsters)(l).includes(monster)) {
+              continue;
+            }
+
+            locations.push(l);
+          }} catch (err) {_iterator4.e(err);} finally {_iterator4.f();}
+
+        return locations;
+      };
+
+      var makeString =
+      function makeString(string, locations) {
+        return (
+          "<font color='gray' title='Locations: " +
+          (0,external_kolmafia_namespaceObject.entityEncode)(locations.join(", ")) +
+          "'>" +
+          string +
+          "</font>");
+
+      };
+
+      (0,external_kolmafia_namespaceObject.print)("Hover over the monsters to see locations");var _iterator5 = _createForOfIteratorHelper(
+
+      unknown),_step5;try {for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {var group = _step5.value;
           monstersPrinted += group.monsters.length;
           linesPrinted++;
 
-          if (group.monsters.length <= 3) {var _iterator5 = _createForOfIteratorHelper(
-            group.monsters),_step5;try {for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {var monster = _step5.value;
-                (0,external_kolmafia_namespaceObject.print)(
-                monster + (group.groupName != null ? " @ " + group.groupName : ""));
+          if (group.groupName == null) {var _iterator6 = _createForOfIteratorHelper(
+            group.monsters),_step6;try {for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {var _monster2 = _step6.value;
+                (0,external_kolmafia_namespaceObject.printHtml)(
+                makeString(
+                _monster2 + (
+                group.groupName != null ? " @ " + group.groupName : ""),
+                getLocations(_monster2)));
 
-              }} catch (err) {_iterator5.e(err);} finally {_iterator5.f();}
+
+              }} catch (err) {_iterator6.e(err);} finally {_iterator6.f();}
           } else {
-            (0,external_kolmafia_namespaceObject.print)(
-            "<" + group.monsters.length + " " + group.groupName + " monsters>");
+            (0,external_kolmafia_namespaceObject.printHtml)(
+            "<font color='blue'>" +
+            group.groupName +
+            " Monsters:</font> " +
+            group.monsters.
+            map((monster) => makeString(monster + "", getLocations(monster))).
+            join(", "));
 
           }
 
           if (linesPrinted >= limit && monstersPrinted + 1 < totalUnknown) {
             break;
           }
-        }} catch (err) {_iterator4.e(err);} finally {_iterator4.f();}
+        }} catch (err) {_iterator5.e(err);} finally {_iterator5.f();}
 
       if (totalUnknown > monstersPrinted) {
         (0,external_kolmafia_namespaceObject.print)(
@@ -220,19 +266,24 @@ LocketMonsters = /*#__PURE__*/function () {function LocketMonsters() {_classCall
 
       }
 
+      var totalMonsters = external_kolmafia_namespaceObject.Monster.all().filter(
+      (m) => m.copyable && !m.boss).
+      length;
+
       (0,external_kolmafia_namespaceObject.print)(
       "You have " +
       totalKnown +
       " / " +
       totalToGet +
-      " (In total there are " +
+      ". Including every monster possible, you have " +
       alreadyKnow.length +
-      " monsters in your locket)");
+      " / " +
+      totalMonsters);
 
     } }]);return LocketMonsters;}();
 
 
-function main() {var limit = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "5";
+function main() {var limit = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "10";
   new LocketMonsters().printLocket((0,external_kolmafia_namespaceObject.toInt)(limit));
 }
 var __webpack_export_target__ = exports;
