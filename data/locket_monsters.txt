@@ -17,6 +17,7 @@ lynyrd
 Stumbling-drunk congoer (female)
 Stumbling-drunk congoer (male)
 Bram the Stoker
+Fantasy Bandit
 
 Green Ops Soldier	In Run
 oil cartel	In Run
@@ -34,7 +35,7 @@ kid who is too old to be Trick-or-Treating	Halloween
 suburban security civilian	Halloween
 vandal kid	Halloween
 
-creepy clown	Goo, Robot
+werecougar	Goo, Robot
 Knob Goblin Elite Guard	Goo, Robot
 Knob Goblin Harem Girl	Goo, Robot
 Cobb's Knob oven	Goo, Robot
