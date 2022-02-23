@@ -218,9 +218,21 @@ LocketMonsters = /*#__PURE__*/function () {function LocketMonsters() {_classCall
 
       var makeString =
       function makeString(string, locations) {
+        var locationsTitle = "";
+
+        if (locations.length > 0) {
+          locationsTitle =
+          "Location" + (
+          locations.length != 1 ? "s" : "") +
+          ": " +
+          (0,external_kolmafia_namespaceObject.entityEncode)(locations.join(", "));
+        } else {
+          locationsTitle = "No Locations Found";
+        }
+
         return (
-          "<font color='gray' title='Locations: " +
-          (0,external_kolmafia_namespaceObject.entityEncode)(locations.join(", ")) +
+          "<font color='gray' title='" +
+          locationsTitle +
           "'>" +
           string +
           "</font>");
@@ -247,7 +259,7 @@ LocketMonsters = /*#__PURE__*/function () {function LocketMonsters() {_classCall
             (0,external_kolmafia_namespaceObject.printHtml)(
             "<font color='blue'>" +
             group.groupName +
-            " Monsters:</font> " +
+            ":</font> " +
             group.monsters.
             map((monster) => makeString(monster + "", getLocations(monster))).
             join(", "));
@@ -270,15 +282,8 @@ LocketMonsters = /*#__PURE__*/function () {function LocketMonsters() {_classCall
       (m) => m.copyable && !m.boss).
       length;
 
-      (0,external_kolmafia_namespaceObject.print)(
-      "You have " +
-      totalKnown +
-      " / " +
-      totalToGet +
-      ". Including every monster possible, you have " +
-      alreadyKnow.length +
-      " / " +
-      totalMonsters);
+      (0,external_kolmafia_namespaceObject.printHtml)("You have ".concat(
+      totalKnown, " / ").concat(totalToGet, ". Including every monster <font title=\"The data on copyable monsters isn't always accurate.\">possible*,</font> you have ").concat(alreadyKnow.length, " / ").concat(totalMonsters));
 
     } }]);return LocketMonsters;}();
 
