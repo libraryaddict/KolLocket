@@ -185,9 +185,21 @@ class LocketMonsters {
 
     let makeString: (string: String, locations: Location[]) => string =
       function (string: String, locations: Location[]) {
+        let locationsTitle = "";
+
+        if (locations.length > 0) {
+          locationsTitle =
+            "Location" +
+            (locations.length != 1 ? "s" : "") +
+            ": " +
+            entityEncode(locations.join(", "));
+        } else {
+          locationsTitle = "No Locations Found";
+        }
+
         return (
-          "<font color='gray' title='Locations: " +
-          entityEncode(locations.join(", ")) +
+          "<font color='gray' title='" +
+          locationsTitle +
           "'>" +
           string +
           "</font>"
@@ -214,7 +226,7 @@ class LocketMonsters {
         printHtml(
           "<font color='blue'>" +
             group.groupName +
-            " Monsters:</font> " +
+            ":</font> " +
             group.monsters
               .map((monster) => makeString(monster + "", getLocations(monster)))
               .join(", ")
@@ -237,15 +249,8 @@ class LocketMonsters {
       (m) => m.copyable && !m.boss
     ).length;
 
-    print(
-      "You have " +
-        totalKnown +
-        " / " +
-        totalToGet +
-        ". Including every monster possible, you have " +
-        alreadyKnow.length +
-        " / " +
-        totalMonsters
+    printHtml(
+      `You have ${totalKnown} / ${totalToGet}. Including every monster <font title="The data on copyable monsters isn't always accurate.">possible*,</font> you have ${alreadyKnow.length} / ${totalMonsters}`
     );
   }
 }

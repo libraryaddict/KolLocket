@@ -1,97 +1,99 @@
-Ghost
-Mountain Man
-Astronomer
-Camel's Toe
-Ninja Snowman Assassin
 sausage goblin
 screambat
 beanbat
-Baa'baa'bu'ran
-
 Lynyrd Skinner
-forest spirit
 dairy goat
 Swarm of scarab beatles
 blur
 lynyrd
-Stumbling-drunk congoer (female)
-Stumbling-drunk congoer (male)
-Bram the Stoker
-Fantasy Bandit
 
-Green Ops Soldier	In Run
-oil cartel	In Run
-Lobsterfrogman	In Run
-War Frat Mobile Grill Unit	In Run
-Swarm of Ghuol Whelps	In Run
+Ghost	Ascension Musts
+Mountain Man	Ascension Musts
+Fantasy Bandit	Ascension Musts
+forest spirit	Ascension Musts
 
-biker	Neverending Party
-burnout	Neverending Party
-jock	Neverending Party
-party girl	Neverending Party
-"plain" girl	Neverending Party
+Astronomer	Monsters nice to have
+Camel's Toe	Monsters nice to have
+Ninja Snowman Assassin	Monsters nice to have
+Stumbling-drunk congoer (female)	Monsters nice to have
+Stumbling-drunk congoer (male)	Monsters nice to have
+Baa'baa'bu'ran	Monsters nice to have
+Bram the Stoker	Monsters nice to have
 
-kid who is too old to be Trick-or-Treating	Halloween
-suburban security civilian	Halloween
-vandal kid	Halloween
+Green Ops Soldier	Available while ascending
+oil cartel	Available while ascending
+Lobsterfrogman	Available while ascending
+War Frat Mobile Grill Unit	Available while ascending
+Giant swarm of ghuol whelps	Available while ascending
+Swarm of Ghuol Whelps	Available while ascending
 
-werecougar	Goo, Robot
-Knob Goblin Elite Guard	Goo, Robot
-Knob Goblin Harem Girl	Goo, Robot
-Cobb's Knob oven	Goo, Robot
-Knob Goblin Alchemist	Goo, Robot
-Knob Goblin MBA	Goo, Robot
-pine bat	Goo, Robot
-suckubus	Goo, Robot
-Ninja Snowman Weaponmaster	Goo, Robot
-crêep	Goo, Robot
-Carnivorous Moxie Weed	Goo, Robot
-raging bull	Goo, Robot
-Spectral Jellyfish	Goo, Robot
-ratbat	Goo, Robot
-beanbat	Goo, Robot
-black panther	Goo, Robot
-fan dancer	Goo, Robot
-mind flayer	Goo, Robot
-eXtreme cross-country hippy	Goo, Robot
-drunk goat	Goo, Robot
-malevolent hair clog	Goo, Robot
-animated ornate nightstand	Goo, Robot
-pooltergeist	Goo, Robot
-anglerbush	Goo, Robot
-cubist bull	Goo, Robot
-jacob's adder	Goo, Robot
-spooky music box	Goo, Robot
-Pr Imp	Goo, Robot
-junksprite bender	Goo, Robot
-sewer snake with a sewer snake in it	Goo, Robot
-remaindered skeleton	Goo, Robot
-smut orc screwer	Goo, Robot
-spooky vampire	Goo, Robot
-lihc	Goo, Robot
-white lion	Goo, Robot
-ghost miner	Goo, Robot
-1335 HaXx0r	Goo, Robot
+biker	Neverending Party Monsters
+burnout	Neverending Party Monsters
+jock	Neverending Party Monsters
+party girl	Neverending Party Monsters
+"plain" girl	Neverending Party Monsters
 
-Black Crayon Beast	Black Crayon
-Black Crayon Beetle	Black Crayon
-Black Crayon Constellation	Black Crayon
-Black Crayon Golem	Black Crayon
-Black Crayon Demon	Black Crayon
-Black Crayon Man	Black Crayon
-Black Crayon Elemental	Black Crayon
-Black Crayon Crimbo Elf	Black Crayon
-Black Crayon Fish	Black Crayon
-Black Crayon Goblin	Black Crayon
-Black Crayon Hippy	Black Crayon
-Black Crayon Hobo	Black Crayon
-Black Crayon Shambling Monstrosity	Black Crayon
-Black Crayon Manloid	Black Crayon
-Black Crayon Mer-kin	Black Crayon
-Black Crayon Frat Orc	Black Crayon
-Black Crayon Penguin	Black Crayon
-Black Crayon Pirate	Black Crayon
-Black Crayon Flower	Black Crayon
-Black Crayon Slime	Black Crayon
-Black Crayon Undead Thing	Black Crayon
-Black Crayon Spiraling Shape	Black Crayon
+kid who is too old to be Trick-or-Treating	Halloween Monsters
+suburban security civilian	Halloween Monsters
+vandal kid	Halloween Monsters
+
+werecougar	Monsters for Grey You Path
+Knob Goblin Elite Guard	Monsters for Grey You Path
+Knob Goblin Harem Girl	Monsters for Grey You Path
+Cobb's Knob oven	Monsters for Grey You Path
+Knob Goblin Alchemist	Monsters for Grey You Path
+Knob Goblin MBA	Monsters for Grey You Path
+pine bat	Monsters for Grey You Path
+suckubus	Monsters for Grey You Path
+Ninja Snowman Weaponmaster	Monsters for Grey You Path
+crêep	Monsters for Grey You Path
+Carnivorous Moxie Weed	Monsters for Grey You Path
+raging bull	Monsters for Grey You Path
+Spectral Jellyfish	Monsters for Grey You Path
+ratbat	Monsters for Grey You Path
+beanbat	Monsters for Grey You Path
+black panther	Monsters for Grey You Path
+fan dancer	Monsters for Grey You Path
+mind flayer	Monsters for Grey You Path
+eXtreme cross-country hippy	Monsters for Grey You Path
+drunk goat	Monsters for Grey You Path
+malevolent hair clog	Monsters for Grey You Path
+animated ornate nightstand	Monsters for Grey You Path
+pooltergeist	Monsters for Grey You Path
+anglerbush	Monsters for Grey You Path
+cubist bull	Monsters for Grey You Path
+jacob's adder	Monsters for Grey You Path
+spooky music box	Monsters for Grey You Path
+Pr Imp	Monsters for Grey You Path
+junksprite bender	Monsters for Grey You Path
+sewer snake with a sewer snake in it	Monsters for Grey You Path
+remaindered skeleton	Monsters for Grey You Path
+smut orc screwer	Monsters for Grey You Path
+spooky vampire	Monsters for Grey You Path
+lihc	Monsters for Grey You Path
+white lion	Monsters for Grey You Path
+ghost miner	Monsters for Grey You Path
+1335 HaXx0r	Monsters for Grey You Path
+
+Black Crayon Beast	Black Crayon Monsters
+Black Crayon Beetle	Black Crayon Monsters
+Black Crayon Constellation	Black Crayon Monsters
+Black Crayon Golem	Black Crayon Monsters
+Black Crayon Demon	Black Crayon Monsters
+Black Crayon Man	Black Crayon Monsters
+Black Crayon Elemental	Black Crayon Monsters
+Black Crayon Crimbo Elf	Black Crayon Monsters
+Black Crayon Fish	Black Crayon Monsters
+Black Crayon Goblin	Black Crayon Monsters
+Black Crayon Hippy	Black Crayon Monsters
+Black Crayon Hobo	Black Crayon Monsters
+Black Crayon Shambling Monstrosity	Black Crayon Monsters
+Black Crayon Manloid	Black Crayon Monsters
+Black Crayon Mer-kin	Black Crayon Monsters
+Black Crayon Frat Orc	Black Crayon Monsters
+Black Crayon Penguin	Black Crayon Monsters
+Black Crayon Pirate	Black Crayon Monsters
+Black Crayon Flower	Black Crayon Monsters
+Black Crayon Slime	Black Crayon Monsters
+Black Crayon Undead Thing	Black Crayon Monsters
+Black Crayon Spiraling Shape	Black Crayon Monsters
