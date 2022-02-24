@@ -221,13 +221,13 @@ LocketMonsters = /*#__PURE__*/function () {function LocketMonsters() {_classCall
         var locationsTitle = "";
 
         if (locations.length > 0) {
-          locationsTitle =
-          "Location" + (
-          locations.length != 1 ? "s" : "") +
-          ": " +
-          (0,external_kolmafia_namespaceObject.entityEncode)(locations.join(", "));
+          var locationsStrings = locations.map(
+          (l) => l.zone + ": " + l);
+
+
+          locationsTitle = (0,external_kolmafia_namespaceObject.entityEncode)(locationsStrings.join(", "));
         } else {
-          locationsTitle = "No Locations Found";
+          locationsTitle = "No locations found";
         }
 
         return (
