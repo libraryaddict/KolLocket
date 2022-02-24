@@ -19,11 +19,17 @@ Stumbling-drunk congoer (female)	Monsters nice to have
 Stumbling-drunk congoer (male)	Monsters nice to have
 Baa'baa'bu'ran	Monsters nice to have
 Bram the Stoker	Monsters nice to have
+Knight (Snake)	Monsters nice to have
+Knob Goblin Embezzler	Monsters nice to have
+Red Fox	Monsters nice to have
+Bad ASCII Art	Monsters nice to have
+Knob Goblin Elite Guard Captain	Monsters nice to have
 
 Green Ops Soldier	Available while ascending
 oil cartel	Available while ascending
 Lobsterfrogman	Available while ascending
 War Frat Mobile Grill Unit	Available while ascending
+Bailey's Beetle	Available while ascending
 Giant swarm of ghuol whelps	Available while ascending
 Swarm of Ghuol Whelps	Available while ascending
 
@@ -97,3 +103,8 @@ Black Crayon Flower	Black Crayon Monsters
 Black Crayon Slime	Black Crayon Monsters
 Black Crayon Undead Thing	Black Crayon Monsters
 Black Crayon Spiraling Shape	Black Crayon Monsters
+
+François Verte, Art Teacher	KoL High School Monsters
+Mrs. K, the Chemistry Teacher	KoL High School Monsters
+X-fingered Shop Teacher	KoL High School Monsters
+dropped base	KoL High School Monsters
