@@ -188,13 +188,13 @@ class LocketMonsters {
         let locationsTitle = "";
 
         if (locations.length > 0) {
-          locationsTitle =
-            "Location" +
-            (locations.length != 1 ? "s" : "") +
-            ": " +
-            entityEncode(locations.join(", "));
+          let locationsStrings: string[] = locations.map(
+            (l) => l.zone + ": " + l
+          );
+
+          locationsTitle = entityEncode(locationsStrings.join(", "));
         } else {
-          locationsTitle = "No Locations Found";
+          locationsTitle = "No locations found";
         }
 
         return (
