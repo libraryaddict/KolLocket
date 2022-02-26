@@ -21,6 +21,7 @@ class MonsterGroup {
 
 class LocketMonsters {
   propertyName: string = "_locketMonstersSaved";
+  propertyNameKnownToHave = "locketAmountKnownToHave";
 
   loadMonsters(): MonsterGroup[] {
     let buffer = fileToBuffer("locket_monsters.txt");
@@ -36,14 +37,25 @@ class LocketMonsters {
       }
 
       let spl = line.split("\t");
+      let monster: Monster;
 
-      let monster = Monster.get(spl[0]);
+      try {
+        monster = Monster.get(spl[0]);
+      } catch {
+        print("Invalid monster: " + spl[0], "red");
+        return;
+      }
 
-      if (
-        monster == null ||
-        monster == Monster.get("None") ||
-        alreadyProcessed.includes(monster)
-      ) {
+      if (monster == null || monster == Monster.get("None")) {
+        return;
+      }
+
+      if (alreadyProcessed.includes(monster)) {
+        print(
+          "Uou have a duplicate entry for " +
+            monster +
+            " in your locket_monsters.txt"
+        );
         return;
       }
 
@@ -75,6 +87,8 @@ class LocketMonsters {
       Monster.get(m)
     );
 
+    let knownToHave = toInt(getProperty(this.propertyNameKnownToHave));
+
     // Add the fought
     for (let monster of getProperty("_locketMonstersFought")
       .split(",")
@@ -105,6 +119,10 @@ class LocketMonsters {
         this.propertyName,
         locketMonsters.map((m) => toInt(m)).join(",")
       );
+      setProperty(
+        this.propertyNameKnownToHave,
+        locketMonsters.length.toString()
+      );
     } else {
       locketMonsters = savedLocketMonsters;
     }
@@ -115,8 +133,9 @@ class LocketMonsters {
   printLocket(limit: number) {
     let wantToGet: MonsterGroup[] = this.loadMonsters();
     let alreadyKnow: Monster[] = this.getLocketMonsters();
+    let knownToHave = toInt(getProperty(this.propertyNameKnownToHave));
 
-    if (alreadyKnow.length <= 3) {
+    if (alreadyKnow.length < knownToHave) {
       print(
         "This is embarrassing.. Can't pull data on what locket monsters you own!",
         "red"

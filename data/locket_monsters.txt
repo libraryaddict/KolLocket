@@ -57,7 +57,6 @@ Carnivorous Moxie Weed	Monsters for Grey You Path
 raging bull	Monsters for Grey You Path
 Spectral Jellyfish	Monsters for Grey You Path
 ratbat	Monsters for Grey You Path
-beanbat	Monsters for Grey You Path
 black panther	Monsters for Grey You Path
 fan dancer	Monsters for Grey You Path
 mind flayer	Monsters for Grey You Path
@@ -80,6 +79,23 @@ lihc	Monsters for Grey You Path
 white lion	Monsters for Grey You Path
 ghost miner	Monsters for Grey You Path
 1335 HaXx0r	Monsters for Grey You Path
+Claybender Sorcerer Ghost	Monsters for Grey You Path
+demonic icebox	Monsters for Grey You Path
+zombie waltzers	Monsters for Grey You Path
+me4t begZ0r	Monsters for Grey You Path
+Big Wheelin' Twins	Monsters for Grey You Path
+stuffed moose head	Monsters for Grey You Path
+Pygmy Janitor	Monsters for Grey You Path
+Drunk Pygmy	Monsters for Grey You Path
+Pygmy Witch Lawyer	Monsters for Grey You Path
+Steam elemental	Monsters for Grey You Path
+Snow Queen	Monsters for Grey You Path
+possessed wine rack	Monsters for Grey You Path
+Flock of Stab-bats	Monsters for Grey You Path
+undead elbow macaroni	Monsters for Grey You Path
+Sub-Assistant Knob Mad Scientist	Monsters for Grey You Path
+dopey 7-Foot Dwarf	Monsters for Grey You Path
+banshee librarian	Monsters for Grey You Path
 
 Black Crayon Beast	Black Crayon Monsters
 Black Crayon Beetle	Black Crayon Monsters
