@@ -53,7 +53,8 @@ MonsterGroup = /*#__PURE__*/_createClass(function MonsterGroup() {_classCallChec
 
 
 LocketMonsters = /*#__PURE__*/function () {function LocketMonsters() {_classCallCheck(this, LocketMonsters);_defineProperty(this, "propertyName",
-    "_locketMonstersSaved");}_createClass(LocketMonsters, [{ key: "loadMonsters", value:
+    "_locketMonstersSaved");_defineProperty(this, "propertyNameKnownToHave",
+    "locketAmountKnownToHave");}_createClass(LocketMonsters, [{ key: "loadMonsters", value:
 
     function loadMonsters() {
       var buffer = (0,external_kolmafia_namespaceObject.fileToBuffer)("locket_monsters.txt");
@@ -69,14 +70,25 @@ LocketMonsters = /*#__PURE__*/function () {function LocketMonsters() {_classCall
         }
 
         var spl = line.split("\t");
+        var monster;
 
-        var monster = external_kolmafia_namespaceObject.Monster.get(spl[0]);
+        try {
+          monster = external_kolmafia_namespaceObject.Monster.get(spl[0]);
+        } catch (_unused) {
+          (0,external_kolmafia_namespaceObject.print)("Invalid monster: " + spl[0], "red");
+          return;
+        }
 
-        if (
-        monster == null ||
-        monster == external_kolmafia_namespaceObject.Monster.get("None") ||
-        alreadyProcessed.includes(monster))
-        {
+        if (monster == null || monster == external_kolmafia_namespaceObject.Monster.get("None")) {
+          return;
+        }
+
+        if (alreadyProcessed.includes(monster)) {
+          (0,external_kolmafia_namespaceObject.print)(
+          "Uou have a duplicate entry for " +
+          monster +
+          " in your locket_monsters.txt");
+
           return;
         }
 
@@ -108,6 +120,8 @@ LocketMonsters = /*#__PURE__*/function () {function LocketMonsters() {_classCall
       external_kolmafia_namespaceObject.Monster.get(m));
 
 
+      var knownToHave = (0,external_kolmafia_namespaceObject.toInt)((0,external_kolmafia_namespaceObject.getProperty)(this.propertyNameKnownToHave));
+
       // Add the fought
       var _iterator = _createForOfIteratorHelper((0,external_kolmafia_namespaceObject.getProperty)("_locketMonstersFought").
       split(",").
@@ -138,6 +152,10 @@ LocketMonsters = /*#__PURE__*/function () {function LocketMonsters() {_classCall
         this.propertyName,
         locketMonsters.map((m) => (0,external_kolmafia_namespaceObject.toInt)(m)).join(","));
 
+        (0,external_kolmafia_namespaceObject.setProperty)(
+        this.propertyNameKnownToHave,
+        locketMonsters.length.toString());
+
       } else {
         locketMonsters = savedLocketMonsters;
       }
@@ -148,8 +166,9 @@ LocketMonsters = /*#__PURE__*/function () {function LocketMonsters() {_classCall
     function printLocket(limit) {
       var wantToGet = this.loadMonsters();
       var alreadyKnow = this.getLocketMonsters();
+      var knownToHave = (0,external_kolmafia_namespaceObject.toInt)((0,external_kolmafia_namespaceObject.getProperty)(this.propertyNameKnownToHave));
 
-      if (alreadyKnow.length <= 3) {
+      if (alreadyKnow.length < knownToHave) {
         (0,external_kolmafia_namespaceObject.print)(
         "This is embarrassing.. Can't pull data on what locket monsters you own!",
         "red");
