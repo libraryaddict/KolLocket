@@ -47,6 +47,11 @@ const external_kolmafia_namespaceObject = require("kolmafia");
 ;// CONCATENATED MODULE: ./src/Locket.ts
 function _createForOfIteratorHelper(o, allowArrayLike) {var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];if (!it) {if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {if (it) o = it;var i = 0;var F = function F() {};return { s: F, n: function n() {if (i >= o.length) return { done: true };return { done: false, value: o[i++] };}, e: function e(_e) {throw _e;}, f: F };}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}var normalCompletion = true,didErr = false,err;return { s: function s() {it = it.call(o);}, n: function n() {var step = it.next();normalCompletion = step.done;return step;}, e: function e(_e2) {didErr = true;err = _e2;}, f: function f() {try {if (!normalCompletion && it.return != null) it.return();} finally {if (didErr) throw err;}} };}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);Object.defineProperty(Constructor, "prototype", { writable: false });return Constructor;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var
 
+MonsterInfo = /*#__PURE__*/_createClass(function MonsterInfo() {_classCallCheck(this, MonsterInfo);_defineProperty(this, "monster", void 0);_defineProperty(this, "note", void 0);});var
+
+
+
+
 MonsterGroup = /*#__PURE__*/_createClass(function MonsterGroup() {_classCallCheck(this, MonsterGroup);_defineProperty(this, "monsters",
   []);_defineProperty(this, "groupName", void 0);});var
 
@@ -102,19 +107,23 @@ LocketMonsters = /*#__PURE__*/function () {function LocketMonsters() {_classCall
 
         alreadyProcessed.push(monster);
 
+        var monsterInfo = new MonsterInfo();
+        monsterInfo.monster = monster;
+        monsterInfo.note = (spl[2] || "").trim();
+
         var groupName = spl[1];
 
         if (groupName != null) {
           var _group = monsters.find((group) => group.groupName == groupName);
 
           if (_group != null) {
-            _group.monsters.push(monster);
+            _group.monsters.push(monsterInfo);
             return;
           }
         }
 
         var group = new MonsterGroup();
-        group.monsters.push(monster);
+        group.monsters.push(monsterInfo);
         group.groupName = groupName;
 
         monsters.push(group);
@@ -207,7 +216,7 @@ LocketMonsters = /*#__PURE__*/function () {function LocketMonsters() {_classCall
         g.groupName = group.groupName;var _iterator3 = _createForOfIteratorHelper(
 
         group.monsters),_step3;try {for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {var m = _step3.value;
-            if (alreadyKnow.includes(m)) {
+            if (alreadyKnow.includes(m.monster)) {
               continue;
             }
 
@@ -244,8 +253,9 @@ LocketMonsters = /*#__PURE__*/function () {function LocketMonsters() {_classCall
       };
 
       var makeString =
-      function makeString(string, locations) {
+      function makeString(string, monsterInfo) {
         var locationsTitle = "";
+        var locations = getLocations(monsterInfo.monster);
 
         if (locations.length > 0) {
           var locationsStrings = locations.map(
@@ -255,6 +265,10 @@ LocketMonsters = /*#__PURE__*/function () {function LocketMonsters() {_classCall
           locationsTitle = (0,external_kolmafia_namespaceObject.entityEncode)(locationsStrings.join(", "));
         } else {
           locationsTitle = "No locations found";
+        }
+
+        if (monsterInfo.note.length > 0) {
+          locationsTitle += " ~ Note: " + monsterInfo.note;
         }
 
         return (
@@ -276,9 +290,9 @@ LocketMonsters = /*#__PURE__*/function () {function LocketMonsters() {_classCall
             group.monsters),_step6;try {for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {var _monster2 = _step6.value;
                 (0,external_kolmafia_namespaceObject.printHtml)(
                 makeString(
-                _monster2 + (
+                _monster2.monster + (
                 group.groupName != null ? " @ " + group.groupName : ""),
-                getLocations(_monster2)));
+                _monster2));
 
 
               }} catch (err) {_iterator6.e(err);} finally {_iterator6.f();}
@@ -288,7 +302,7 @@ LocketMonsters = /*#__PURE__*/function () {function LocketMonsters() {_classCall
             group.groupName +
             ":</font> " +
             group.monsters.
-            map((monster) => makeString(monster + "", getLocations(monster))).
+            map((monster) => makeString(monster.monster + "", monster)).
             join(", "));
 
           }
