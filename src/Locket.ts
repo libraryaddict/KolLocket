@@ -50,9 +50,17 @@ class LocketMonsters {
         return;
       }
 
+      if (!monster.copyable || monster.boss) {
+        print(
+          monster +
+            " is marked as a boss or no-copy, yet is in locket_monsters.txt. Is this a mistake?",
+          "gray"
+        );
+      }
+
       if (alreadyProcessed.includes(monster)) {
         print(
-          "Uou have a duplicate entry for " +
+          "You have a duplicate entry for " +
             monster +
             " in your locket_monsters.txt"
         );
