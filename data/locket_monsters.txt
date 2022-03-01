@@ -7,10 +7,10 @@ Swarm of scarab beatles
 blur
 lynyrd
 
-Ghost	Ascension Musts
-Mountain Man	Ascension Musts
-Fantasy Bandit	Ascension Musts
-forest spirit	Ascension Musts
+Ghost	Ascension Musts	White Pixels!
+Mountain Man	Ascension Musts	Ore for the trapper!
+Fantasy Bandit	Ascension Musts	If you can copy this 5x, loot token!
+forest spirit	Ascension Musts	White Pixels!
 
 Astronomer	Monsters nice to have
 Camel's Toe	Monsters nice to have
@@ -28,10 +28,10 @@ Knob Goblin Elite Guard Captain	Monsters nice to have
 Green Ops Soldier	Available while ascending
 oil cartel	Available while ascending
 Lobsterfrogman	Available while ascending
-War Frat Mobile Grill Unit	Available while ascending
+War Frat Mobile Grill Unit	Available while ascending	Not available if a frat boy
 Bailey's Beetle	Available while ascending
-Giant swarm of ghuol whelps	Available while ascending
-Swarm of Ghuol Whelps	Available while ascending
+Giant swarm of ghuol whelps	Available while ascending	Cannot wish, fax this in?
+Swarm of Ghuol Whelps	Available while ascending	Cannot wish, fax this in?
 
 biker	Neverending Party Monsters
 burnout	Neverending Party Monsters
@@ -122,30 +122,30 @@ Irritating Series of Random Encounters	Monsters for Grey You Path
 Iiti Kitty	Monsters for Grey You Path
 1335 HaXx0r	Monsters for Grey You Path
 
-Black Crayon Beast	Black Crayon Monsters
-Black Crayon Beetle	Black Crayon Monsters
-Black Crayon Constellation	Black Crayon Monsters
-Black Crayon Golem	Black Crayon Monsters
-Black Crayon Demon	Black Crayon Monsters
-Black Crayon Man	Black Crayon Monsters
-Black Crayon Elemental	Black Crayon Monsters
-Black Crayon Crimbo Elf	Black Crayon Monsters
-Black Crayon Fish	Black Crayon Monsters
-Black Crayon Goblin	Black Crayon Monsters
-Black Crayon Hippy	Black Crayon Monsters
-Black Crayon Hobo	Black Crayon Monsters
-Black Crayon Shambling Monstrosity	Black Crayon Monsters
-Black Crayon Manloid	Black Crayon Monsters
-Black Crayon Mer-kin	Black Crayon Monsters
-Black Crayon Frat Orc	Black Crayon Monsters
-Black Crayon Penguin	Black Crayon Monsters
-Black Crayon Pirate	Black Crayon Monsters
-Black Crayon Flower	Black Crayon Monsters
-Black Crayon Slime	Black Crayon Monsters
-Black Crayon Undead Thing	Black Crayon Monsters
-Black Crayon Spiraling Shape	Black Crayon Monsters
+Black Crayon Beast	Black Crayon Monsters	Honestly we only need crayon monster..
+Black Crayon Beetle	Black Crayon Monsters	Honestly we only need crayon monster..
+Black Crayon Constellation	Black Crayon Monsters	Honestly we only need crayon monster..
+Black Crayon Golem	Black Crayon Monsters	Honestly we only need crayon monster..
+Black Crayon Demon	Black Crayon Monsters	Honestly we only need crayon monster..
+Black Crayon Man	Black Crayon Monsters	Honestly we only need crayon monster..
+Black Crayon Elemental	Black Crayon Monsters	Honestly we only need crayon monster..
+Black Crayon Crimbo Elf	Black Crayon Monsters	Honestly we only need crayon monster..
+Black Crayon Fish	Black Crayon Monsters	Honestly we only need crayon monster..
+Black Crayon Goblin	Black Crayon Monsters	Honestly we only need crayon monster..
+Black Crayon Hippy	Black Crayon Monsters	Honestly we only need crayon monster..
+Black Crayon Hobo	Black Crayon Monsters	Honestly we only need crayon monster..
+Black Crayon Shambling Monstrosity	Black Crayon Monsters	Honestly we only need crayon monster..
+Black Crayon Manloid	Black Crayon Monsters	Honestly we only need crayon monster..
+Black Crayon Mer-kin	Black Crayon Monsters	Honestly we only need crayon monster..
+Black Crayon Frat Orc	Black Crayon Monsters	Honestly we only need crayon monster..
+Black Crayon Penguin	Black Crayon Monsters	Honestly we only need crayon monster..
+Black Crayon Pirate	Black Crayon Monsters	Honestly we only need crayon monster..
+Black Crayon Flower	Black Crayon Monsters	Honestly we only need crayon monster..
+Black Crayon Slime	Black Crayon Monsters	Honestly we only need crayon monster..
+Black Crayon Undead Thing	Black Crayon Monsters	Honestly we only need crayon monster..
+Black Crayon Spiraling Shape	Black Crayon Monsters	Honestly we only need crayon monster..
 
-François Verte, Art Teacher	KoL High School Monsters
-Mrs. K, the Chemistry Teacher	KoL High School Monsters
-X-fingered Shop Teacher	KoL High School Monsters
+François Verte, Art Teacher	KoL High School Monsters	Cannot wish, fax in with EasyFax?
+Mrs. K, the Chemistry Teacher	KoL High School Monsters	Cannot wish, fax in with EasyFax?
+X-fingered Shop Teacher	KoL High School Monsters	Cannot wish, fax in with EasyFax?
 dropped base	KoL High School Monsters

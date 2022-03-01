@@ -8,14 +8,18 @@ import {
   toMonster,
   Monster,
   printHtml,
-  urlEncode,
   entityEncode,
   Location,
   getMonsters,
 } from "kolmafia";
 
+class MonsterInfo {
+  monster: Monster;
+  note: string;
+}
+
 class MonsterGroup {
-  monsters: Monster[] = [];
+  monsters: MonsterInfo[] = [];
   groupName: string;
 }
 
@@ -69,19 +73,23 @@ class LocketMonsters {
 
       alreadyProcessed.push(monster);
 
+      let monsterInfo = new MonsterInfo();
+      monsterInfo.monster = monster;
+      monsterInfo.note = (spl[2] || "").trim();
+
       let groupName = spl[1];
 
       if (groupName != null) {
         let group = monsters.find((group) => group.groupName == groupName);
 
         if (group != null) {
-          group.monsters.push(monster);
+          group.monsters.push(monsterInfo);
           return;
         }
       }
 
       let group = new MonsterGroup();
-      group.monsters.push(monster);
+      group.monsters.push(monsterInfo);
       group.groupName = groupName;
 
       monsters.push(group);
@@ -174,7 +182,7 @@ class LocketMonsters {
         g.groupName = group.groupName;
 
         for (let m of group.monsters) {
-          if (alreadyKnow.includes(m)) {
+          if (alreadyKnow.includes(m.monster)) {
             continue;
           }
 
@@ -210,9 +218,10 @@ class LocketMonsters {
       return locations;
     };
 
-    let makeString: (string: String, locations: Location[]) => string =
-      function (string: String, locations: Location[]) {
+    let makeString: (string: String, monsterInfo: MonsterInfo) => string =
+      function (string: String, monsterInfo: MonsterInfo) {
         let locationsTitle = "";
+        let locations = getLocations(monsterInfo.monster);
 
         if (locations.length > 0) {
           let locationsStrings: string[] = locations.map(
@@ -222,6 +231,10 @@ class LocketMonsters {
           locationsTitle = entityEncode(locationsStrings.join(", "));
         } else {
           locationsTitle = "No locations found";
+        }
+
+        if (monsterInfo.note.length > 0) {
+          locationsTitle += " ~ Note: " + monsterInfo.note;
         }
 
         return (
@@ -243,9 +256,9 @@ class LocketMonsters {
         for (let monster of group.monsters) {
           printHtml(
             makeString(
-              monster +
+              monster.monster +
                 (group.groupName != null ? " @ " + group.groupName : ""),
-              getLocations(monster)
+              monster
             )
           );
         }
@@ -255,7 +268,7 @@ class LocketMonsters {
             group.groupName +
             ":</font> " +
             group.monsters
-              .map((monster) => makeString(monster + "", getLocations(monster)))
+              .map((monster) => makeString(monster.monster + "", monster))
               .join(", ")
         );
       }
