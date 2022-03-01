@@ -43,59 +43,63 @@ kid who is too old to be Trick-or-Treating	Halloween Monsters
 suburban security civilian	Halloween Monsters
 vandal kid	Halloween Monsters
 
+Bullet Bill	Monsters for Grey You Path
 werecougar	Monsters for Grey You Path
+Claybender Sorcerer Ghost	Monsters for Grey You Path
+pine bat	Monsters for Grey You Path
+ratbat	Monsters for Grey You Path
+black panther	Monsters for Grey You Path
 Knob Goblin Elite Guard	Monsters for Grey You Path
 Knob Goblin Harem Girl	Monsters for Grey You Path
 Cobb's Knob oven	Monsters for Grey You Path
 Knob Goblin Alchemist	Monsters for Grey You Path
 Knob Goblin MBA	Monsters for Grey You Path
-pine bat	Monsters for Grey You Path
-suckubus	Monsters for Grey You Path
-Ninja Snowman Weaponmaster	Monsters for Grey You Path
-crêep	Monsters for Grey You Path
-Carnivorous Moxie Weed	Monsters for Grey You Path
-raging bull	Monsters for Grey You Path
-Spectral Jellyfish	Monsters for Grey You Path
-ratbat	Monsters for Grey You Path
-black panther	Monsters for Grey You Path
 fan dancer	Monsters for Grey You Path
 mind flayer	Monsters for Grey You Path
-eXtreme cross-country hippy	Monsters for Grey You Path
+eXtreme cross-country hip	Monsters for Grey You Pathpy
 drunk goat	Monsters for Grey You Path
+baseball bat	Monsters for Grey You Path
+zombie waltzers	Monsters for Grey You Path
 malevolent hair clog	Monsters for Grey You Path
 animated ornate nightstand	Monsters for Grey You Path
 pooltergeist	Monsters for Grey You Path
+Steam Elemental	Monsters for Grey You Path
 anglerbush	Monsters for Grey You Path
 cubist bull	Monsters for Grey You Path
+demonic icebox	Monsters for Grey You Path
 jacob's adder	Monsters for Grey You Path
+banshee librarian	Monsters for Grey You Path
 spooky music box	Monsters for Grey You Path
+undead elbow macaroni	Monsters for Grey You Path
+stuffed moose head	Monsters for Grey You Path
+possessed wine rack	Monsters for Grey You Path
+Pygmy Witch Lawyer	Monsters for Grey You Path
+drunk pygmy	Monsters for Grey You Path
+pygmy janitor	Monsters for Grey You Path
+snow queen	Monsters for Grey You Path
+suckubus	Monsters for Grey You Path
+Flock of Stab-bats	Monsters for Grey You Path
+dopey 7-Foot Dwarf	Monsters for Grey You Path
+Ninja Snowman Weaponmaster	Monsters for Grey You Path
 Pr Imp	Monsters for Grey You Path
+crêep	Monsters for Grey You Path
+BASIC Elemental	Monsters for Grey You Path
+Carnivorous Moxie Weed	Monsters for Grey You Path
+Spectral Jellyfish	Monsters for Grey You Path
+Shifty pirate	Monsters for Grey You Path
+oil slick	Monsters for Grey You Path
 junksprite bender	Monsters for Grey You Path
+Sub-Assistant Knob Mad Scientist	Monsters for Grey You Path
 sewer snake with a sewer snake in it	Monsters for Grey You Path
 remaindered skeleton	Monsters for Grey You Path
+rushing bum	Monsters for Grey You Path
 smut orc screwer	Monsters for Grey You Path
+raging bull	Monsters for Grey You Path
 spooky vampire	Monsters for Grey You Path
-lihc	Monsters for Grey You Path
-white lion	Monsters for Grey You Path
-ghost miner	Monsters for Grey You Path
-1335 HaXx0r	Monsters for Grey You Path
-Claybender Sorcerer Ghost	Monsters for Grey You Path
-demonic icebox	Monsters for Grey You Path
-zombie waltzers	Monsters for Grey You Path
-me4t begZ0r	Monsters for Grey You Path
 Big Wheelin' Twins	Monsters for Grey You Path
-stuffed moose head	Monsters for Grey You Path
-Pygmy Janitor	Monsters for Grey You Path
-Drunk Pygmy	Monsters for Grey You Path
-Pygmy Witch Lawyer	Monsters for Grey You Path
-Steam elemental	Monsters for Grey You Path
-Snow Queen	Monsters for Grey You Path
-possessed wine rack	Monsters for Grey You Path
-Flock of Stab-bats	Monsters for Grey You Path
-undead elbow macaroni	Monsters for Grey You Path
-Sub-Assistant Knob Mad Scientist	Monsters for Grey You Path
-dopey 7-Foot Dwarf	Monsters for Grey You Path
-banshee librarian	Monsters for Grey You Path
+lihc	Monsters for Grey You Path
+me4t begZ0r	Monsters for Grey You Path
+white lion	Monsters for Grey You Path
 
 Black Crayon Beast	Black Crayon Monsters
 Black Crayon Beetle	Black Crayon Monsters

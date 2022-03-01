@@ -83,9 +83,17 @@ LocketMonsters = /*#__PURE__*/function () {function LocketMonsters() {_classCall
           return;
         }
 
+        if (!monster.copyable || monster.boss) {
+          (0,external_kolmafia_namespaceObject.print)(
+          monster +
+          " is marked as a boss or no-copy, yet is in locket_monsters.txt. Is this a mistake?",
+          "gray");
+
+        }
+
         if (alreadyProcessed.includes(monster)) {
           (0,external_kolmafia_namespaceObject.print)(
-          "Uou have a duplicate entry for " +
+          "You have a duplicate entry for " +
           monster +
           " in your locket_monsters.txt");
 
