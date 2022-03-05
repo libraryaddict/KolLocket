@@ -31,7 +31,6 @@ Lobsterfrogman	Available while ascending
 War Frat Mobile Grill Unit	Available while ascending	Not available if a frat boy
 Bailey's Beetle	Available while ascending
 Giant swarm of ghuol whelps	Available while ascending	Cannot wish, fax this in?
-Swarm of Ghuol Whelps	Available while ascending	Cannot wish, fax this in?
 
 biker	Neverending Party Monsters
 burnout	Neverending Party Monsters
