@@ -135,10 +135,12 @@ class LocketMonsters {
         this.propertyName,
         locketMonsters.map((m) => toInt(m)).join(",")
       );
-      setProperty(
-        this.propertyNameKnownToHave,
-        locketMonsters.length.toString()
-      );
+      if (knownToHave < locketMonsters.length) {
+        setProperty(
+          this.propertyNameKnownToHave,
+          locketMonsters.length.toString()
+        );
+      }
     } else {
       locketMonsters = savedLocketMonsters;
     }
