@@ -169,10 +169,12 @@ LocketMonsters = /*#__PURE__*/function () {function LocketMonsters() {_classCall
         this.propertyName,
         locketMonsters.map((m) => (0,external_kolmafia_namespaceObject.toInt)(m)).join(","));
 
-        (0,external_kolmafia_namespaceObject.setProperty)(
-        this.propertyNameKnownToHave,
-        locketMonsters.length.toString());
+        if (knownToHave < locketMonsters.length) {
+          (0,external_kolmafia_namespaceObject.setProperty)(
+          this.propertyNameKnownToHave,
+          locketMonsters.length.toString());
 
+        }
       } else {
         locketMonsters = savedLocketMonsters;
       }
