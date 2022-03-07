@@ -23,11 +23,128 @@ class MonsterGroup {
   groupName: string;
 }
 
+class Zone {
+  parentZone: Zone;
+  children: Zone[] = [];
+  id: string;
+  name: string;
+  locations: Location[] = [];
+}
+
 class LocketMonsters {
   propertyName: string = "_locketMonstersSaved";
   propertyNameKnownToHave = "locketAmountKnownToHave";
+  allZones: Map<string, Zone>;
+  monsters: MonsterGroup[];
+  locketMonsters: Monster[];
 
-  loadMonsters(): MonsterGroup[] {
+  loadStuff() {
+    this.allZones = this.getAllZones();
+    this.monsters = this.loadMonsterGroups();
+    this.locketMonsters = this.getLocketMonsters();
+  }
+
+  getFullName(zoneName: string): string {
+    if (zoneName == null) {
+      return zoneName;
+    }
+
+    let zone: Zone = this.allZones.get(zoneName.toLowerCase());
+
+    if (zone == null || zone.parentZone == null) {
+      return zoneName;
+    }
+
+    this.getFullName(zone.parentZone.id) + " " + zone.name;
+  }
+
+  loadMonsterZone(
+    alreadyProcessed: Monster[],
+    monsterGroups: MonsterGroup[],
+    zone: Zone,
+    groupName: string,
+    note: string
+  ) {
+    let zones: Zone[] = [zone];
+
+    while (zones.length > 0) {
+      let zone = zones.pop();
+
+      zones.push(...zone.children);
+
+      for (let loc of zone.locations) {
+        let group = new MonsterGroup();
+        group.groupName =
+          (groupName || "") + this.getFullName(zone.id) + ": " + loc;
+
+        for (let monster of getMonsters(loc)) {
+          if (!monster.copyable || monster.boss) {
+            continue;
+          }
+
+          let info = new MonsterInfo();
+          info.monster = monster;
+          info.note = note;
+
+          group.monsters.push(info);
+        }
+
+        if (group.monsters.length > 0) {
+          monsterGroups.push(group);
+        }
+      }
+    }
+  }
+
+  loadMonsterGroup(
+    alreadyProcessed: Monster[],
+    monsterGroups: MonsterGroup[],
+    monster: Monster,
+    groupName: string,
+    note: string
+  ) {
+    if (monster == null || monster == Monster.get("None")) {
+      return;
+    }
+
+    if (!monster.copyable || monster.boss) {
+      print(
+        monster +
+          " is marked as a boss or no-copy, yet is in locket_monsters.txt. Is this a mistake?",
+        "gray"
+      );
+    }
+
+    if (alreadyProcessed.includes(monster)) {
+      print(
+        "You have a duplicate entry for " +
+          monster +
+          " in your locket_monsters.txt"
+      );
+      return;
+    }
+
+    let monsterInfo = new MonsterInfo();
+    monsterInfo.monster = monster;
+    monsterInfo.note = note;
+
+    if (groupName != null) {
+      let group = monsterGroups.find((group) => group.groupName == groupName);
+
+      if (group != null) {
+        group.monsters.push(monsterInfo);
+        return;
+      }
+    }
+
+    let group = new MonsterGroup();
+    group.monsters.push(monsterInfo);
+    group.groupName = groupName;
+
+    monsterGroups.push(group);
+  }
+
+  loadMonsterGroups(): MonsterGroup[] {
     let buffer = fileToBuffer("locket_monsters.txt");
 
     let monsters: MonsterGroup[] = [];
@@ -41,58 +158,29 @@ class LocketMonsters {
       }
 
       let spl = line.split("\t");
-      let monster: Monster;
+      let groupName = spl[1];
+      let note = spl[2] || "";
+
+      let zone: Zone = this.allZones.get(spl[0].toLowerCase());
+
+      if (zone != null) {
+        this.loadMonsterZone(alreadyProcessed, monsters, zone, groupName, note);
+        return;
+      }
 
       try {
-        monster = Monster.get(spl[0]);
+        let monster: Monster = Monster.get(spl[0]);
+        this.loadMonsterGroup(
+          alreadyProcessed,
+          monsters,
+          monster,
+          groupName,
+          note
+        );
       } catch {
-        print("Invalid monster: " + spl[0], "red");
+        print("Invalid monster/zone: " + spl[0], "red");
         return;
       }
-
-      if (monster == null || monster == Monster.get("None")) {
-        return;
-      }
-
-      if (!monster.copyable || monster.boss) {
-        print(
-          monster +
-            " is marked as a boss or no-copy, yet is in locket_monsters.txt. Is this a mistake?",
-          "gray"
-        );
-      }
-
-      if (alreadyProcessed.includes(monster)) {
-        print(
-          "You have a duplicate entry for " +
-            monster +
-            " in your locket_monsters.txt"
-        );
-        return;
-      }
-
-      alreadyProcessed.push(monster);
-
-      let monsterInfo = new MonsterInfo();
-      monsterInfo.monster = monster;
-      monsterInfo.note = (spl[2] || "").trim();
-
-      let groupName = spl[1];
-
-      if (groupName != null) {
-        let group = monsters.find((group) => group.groupName == groupName);
-
-        if (group != null) {
-          group.monsters.push(monsterInfo);
-          return;
-        }
-      }
-
-      let group = new MonsterGroup();
-      group.monsters.push(monsterInfo);
-      group.groupName = groupName;
-
-      monsters.push(group);
     });
 
     return monsters;
@@ -148,9 +236,50 @@ class LocketMonsters {
     return locketMonsters;
   }
 
+  makeZoneString(string: String, monsterInfo: MonsterInfo) {
+    let locationsTitle = "";
+    let locations = this.getLocations(monsterInfo.monster);
+
+    if (locations.length > 0) {
+      let locationsStrings: string[] = locations.map(
+        (l) => this.getFullName(l.zone) + ": " + l
+      );
+
+      locationsTitle = entityEncode(locationsStrings.join(", "));
+    } else {
+      locationsTitle = "No locations found";
+    }
+
+    if (monsterInfo.note.length > 0) {
+      locationsTitle += " ~ Note: " + monsterInfo.note;
+    }
+
+    return (
+      "<font color='gray' title='" + locationsTitle + "'>" + string + "</font>"
+    );
+  }
+
+  getLocations: (monster: Monster) => Location[] = function (
+    monster: Monster
+  ): Location[] {
+    let locations: Location[] = [];
+
+    for (let l of Location.all()) {
+      if (!getMonsters(l).includes(monster)) {
+        continue;
+      }
+
+      locations.push(l);
+    }
+
+    return locations;
+  };
+
   printLocket(limit: number) {
-    let wantToGet: MonsterGroup[] = this.loadMonsters();
-    let alreadyKnow: Monster[] = this.getLocketMonsters();
+    this.loadStuff();
+
+    let wantToGet: MonsterGroup[] = this.monsters;
+    let alreadyKnow: Monster[] = this.locketMonsters;
     let knownToHave = toInt(getProperty(this.propertyNameKnownToHave));
 
     if (alreadyKnow.length < knownToHave) {
@@ -204,50 +333,6 @@ class LocketMonsters {
     let monstersPrinted: number = 0;
     let linesPrinted: number = 0;
 
-    let getLocations: (monster: Monster) => Location[] = function (
-      monster: Monster
-    ): Location[] {
-      let locations: Location[] = [];
-
-      for (let l of Location.all()) {
-        if (!getMonsters(l).includes(monster)) {
-          continue;
-        }
-
-        locations.push(l);
-      }
-
-      return locations;
-    };
-
-    let makeString: (string: String, monsterInfo: MonsterInfo) => string =
-      function (string: String, monsterInfo: MonsterInfo) {
-        let locationsTitle = "";
-        let locations = getLocations(monsterInfo.monster);
-
-        if (locations.length > 0) {
-          let locationsStrings: string[] = locations.map(
-            (l) => l.zone + ": " + l
-          );
-
-          locationsTitle = entityEncode(locationsStrings.join(", "));
-        } else {
-          locationsTitle = "No locations found";
-        }
-
-        if (monsterInfo.note.length > 0) {
-          locationsTitle += " ~ Note: " + monsterInfo.note;
-        }
-
-        return (
-          "<font color='gray' title='" +
-          locationsTitle +
-          "'>" +
-          string +
-          "</font>"
-        );
-      };
-
     print("Hover over the monsters to see locations");
 
     for (let group of unknown) {
@@ -257,7 +342,7 @@ class LocketMonsters {
       if (group.groupName == null) {
         for (let monster of group.monsters) {
           printHtml(
-            makeString(
+            this.makeZoneString(
               monster.monster +
                 (group.groupName != null ? " @ " + group.groupName : ""),
               monster
@@ -270,7 +355,9 @@ class LocketMonsters {
             group.groupName +
             ":</font> " +
             group.monsters
-              .map((monster) => makeString(monster.monster + "", monster))
+              .map((monster) =>
+                this.makeZoneString(monster.monster + "", monster)
+              )
               .join(", ")
         );
       }
@@ -294,6 +381,41 @@ class LocketMonsters {
     printHtml(
       `You have ${totalKnown} / ${totalToGet}. Including every monster <font title="The data on copyable monsters isn't always accurate.">possible*,</font> you have ${alreadyKnow.length} / ${totalMonsters}`
     );
+  }
+
+  getAllZones(): Map<string, Zone> {
+    let zoneMap: Map<string, Zone> = new Map();
+
+    let zoneData: string[] = fileToBuffer("locket_zones.txt").split("\n");
+
+    for (let data of zoneData) {
+      if (data.length == 0 || data.startsWith("#")) {
+        continue;
+      }
+
+      let spl = data.split("\t");
+
+      if (spl.length < 3) {
+        continue;
+      }
+
+      let zone = new Zone();
+      zone.id = spl[0];
+      zone.parentZone = zoneMap.get(spl[1]);
+      zone.name = spl[2];
+
+      for (let loc of Location.all()) {
+        if (loc.zone != zone.id) {
+          continue;
+        }
+
+        zone.locations.push(loc);
+      }
+
+      zoneMap.set(zone.id.toLowerCase(), zone);
+    }
+
+    return zoneMap;
   }
 }
 
