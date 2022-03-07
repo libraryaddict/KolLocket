@@ -1,0 +1,152 @@
+1
+# zone	parent	description
+
+Town	Town	Seaside Town
+Casino	Town	Seaside Casino
+
+Exploathing	Exploathing	Kingdom of Exploathing
+
+Manor	Town	Spookyraven Manor
+Manor0	Manor	Spookyraven (Cellar)
+Manor1	Manor	Spookyraven (First Floor)
+Manor2	Manor	Spookyraven (Second Floor)
+Manor3	Manor	Spookyraven (Third Floor)
+KOL High School	Town	KOL High School
+
+Clan Basement	Clan Basement	Clan Basement
+Hobopolis	Clan Basement	Hobopolis
+Dreadsylvania	Clan Basement	Dreadsylvania
+
+The Sea	The Sea	The Sea
+
+Plains	Plains	Nearby Plains
+Rift	Plains	Temporal Rift
+Fernswarthy's Tower	Plains	Fernswarthy's Tower
+Beanstalk	Beanstalk	Above the Beanstalk
+RabbitHole	Plains	Down the Rabbit Hole
+Suburbs	Suburbs	The Suburbs of Dis
+Mothership	Mothership	The Bugbear Mothership
+
+BatHole	BatHole	Bat Hole
+
+Knob	Knob	Cobb's Knob
+Lab	Knob	Cobb's Knob Lab
+Menagerie	Knob	Cobb's Knob Menagerie
+
+Cyrpt	Cyrpt	Defiled Cyrpt
+
+Woods	Woods	Distant Woods
+HiddenCity	Woods	Hidden City
+The Drip	Woods	The Drip
+
+Friars	Friars	Deep Fat Friar's
+Pandamonium	Pandamonium	Pandamonium
+
+Mountain	Mountain	Big Mountains
+McLarge	Mountain	Mt. McLargeHuge
+Dungeon	Mountain	Dungeon Full of Dungeons
+Highlands	Mountain	Highlands
+The Red Zeppelin's Mooring	Mountain	The Red Zeppelin's Mooring
+Nemesis Cave	Mountain	Nemesis Cave
+The Snojo	Mountain	The Snojo
+Gingerbread City	Mountain	Gingerbread City
+The Spacegate	Mountain	The Spacegate
+
+Beach	Beach	Desert Beach
+Pyramid	Beach	Ancient Buried Pyramid
+
+Island	Island	Mysterious Island
+
+IsleWar	IsleWar	Island War Quest
+Farm	IsleWar	McMillicancuddy's Farm
+Orchard	IsleWar	Organic Orchard
+Junkyard	IsleWar	Wartime Junkyard
+
+Volcano	Volcano	Secret Tropical Island Volcano Lair
+
+Signed Zones	Signed Zones	Signed Zones
+Gyms	Signed Zones	Clan/Signed Gyms
+MusSign	Signed Zones	Muscle Sign
+MoxSign	Signed Zones	Moxie Sign
+BadMoon	Signed Zones	Bad Moon
+
+Little Canadia	Signed Zones	Little Canadia
+Le Marais D&egrave;gueulasse	Little Canadia	Le Marais D&egrave;gueulasse
+
+Astral	Astral	Astral Plane
+Wormwood	Wormwood	Worm Wood
+Memories	Memories	Memories
+Spaaace	Spaaace	Outer Space
+
+Portal	Portal	El Vibrato Island
+
+Antique Maps	Antique Maps	Antique Maps
+Landscaper	Antique Maps	The Landscaper's Lair
+Jacking	Antique Maps	Prof. Jacking's Lab
+Kegger	Antique Maps	Kegger in the Woods
+Vanya's Castle	Antique Maps	Vanya's Castle
+Magic Commune	Antique Maps	Magic Commune
+Ellsbury's Claim	Antique Maps	Ellsbury's Claim
+
+Psychoses	Psychoses	Psychoses
+Campground	Campground	Campground
+
+Skid Row	Woods	Skid Row
+The Prince's Ball	Woods	The Prince's Ball
+Rumpelstiltskin's Home For Children	Woods	Rumpelstiltskin's Home For Children
+The Candy Witch and the Relentless Child Thieves	Woods	The Candy Witch and the Relentless Child Thieves
+
+Elemental International Airport	Town	Elemental International Airport
+Spring Break Beach	Elemental International Airport	Spring Break Beach
+Conspiracy Island	Elemental International Airport	Conspiracy Island
+Dinseylandfill	Elemental International Airport	Dinseylandfill
+That 70s Volcano	Elemental International Airport	That 70s Volcano
+The Glaciest	Elemental International Airport	The Glaciest
+
+A Monorail Station	Town	A Monorail Station
+FantasyRealm	A Monorail Station	FantasyRealm
+PirateRealm	A Monorail Station	PirateRealm
+PirateRealm Island	PirateRealm	PirateRealm Island
+
+Item-Driven	Item-Driven	Item-Driven Zones
+
+Spelunky Area	Item-Driven	Spelunky Area
+
+Batfellow Area	Item-Driven	Batfellow Area
+Bat-Cavern	Batfellow Area	Bat-Cavern
+Center Park (Low Crime)	Batfellow Area	Center Park (Low Crime)
+Slums (Moderate Crime)	Batfellow Area	Slums (Moderate Crime)
+Industrial District (High Crime)	Batfellow Area	Industrial District (High Crime)
+Downtown	Batfellow Area	Downtown
+
+The Grey Goo Impact Site	The Grey Goo Impact Site	Grey Goo Path
+
+Unsorted	Unsorted	No Category
+Sorceress	Unsorted	Sorceress Lair
+
+Holiday	Unsorted	Holiday Zones
+Override	Unsorted	Discoveries
+
+Events	Events	Events
+Twitch	Town	Time-Twitching Tower
+
+Crimbo21	Holiday	Christmas 2021
+
+Removed	Removed	Removed Areas
+Crimbo05	Removed	Christmas 2005
+Crimbo06	Removed	Christmas 2006
+Crimbo07	Removed	Christmas 2007
+Crimbo08	Removed	Christmas 2008
+Crimbo09	Removed	Christmas 2009
+Crimbo10	Removed	Christmas 2010
+The Candy Diorama	Removed	Christmas 2011
+Crimbo12	Removed	Christmas 2012
+Crimbo13	Removed	Christmas 2013
+Crimbo14	Removed	Christmas 2014
+Crimbo15	Removed	Christmas 2015
+Crimbo16	Removed	Christmas 2016
+Crimbo17	Removed	Christmas 2017
+Crimbo18	Removed	Christmas 2018
+Crimbo19	Removed	Christmas 2019
+Tammy's Offshore Platform	Removed	Crimbo 19 Underwater
+WhiteWed	Removed	White Wednesday
