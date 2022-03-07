@@ -1,3 +1,4 @@
+# Monster Name/Zone	Group Name	Note about this group
 sausage goblin
 screambat
 beanbat

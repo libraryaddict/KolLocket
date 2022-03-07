@@ -11,6 +11,7 @@ import {
   entityEncode,
   Location,
   getMonsters,
+  containsText,
 } from "kolmafia";
 
 class MonsterInfo {
@@ -78,7 +79,11 @@ class LocketMonsters {
           (groupName || "") + this.getFullName(zone.id) + ": " + loc;
 
         for (let monster of getMonsters(loc)) {
-          if (!monster.copyable || monster.boss) {
+          if (
+            !monster.copyable ||
+            monster.boss ||
+            containsText(monster.attributes, "ULTRARARE")
+          ) {
             continue;
           }
 
