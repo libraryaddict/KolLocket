@@ -260,7 +260,7 @@ class LocketMonsters {
     }
 
     return (
-      "<font color='gray' title='" + locationsTitle + "'>" + string + "</font>"
+      "<font color='gray' title=\"" + locationsTitle + "\">" + string + "</font>"
     );
   }
 
@@ -289,18 +289,18 @@ class LocketMonsters {
 
     if (alreadyKnow.length < knownToHave) {
       print(
-        "This is embarrassing.. Can't pull data on what locket monsters you own!",
+        "This is embarrassing. Can't pull data on what locket monsters you own!",
         "red"
       );
 
       if (getProperty("_locketMonstersFought").split(",").length >= 3) {
         print(
-          "You have already fought all 3 locket fights, unfortunately this means you can't load the monsters.. Wait for rollover?",
+          "You have already fought all 3 locket fights, unfortunately this means you can't load the monsters. Wait for rollover?",
           "red"
         );
       } else {
         print(
-          "Try visiting the locket remenise page then run this script again!",
+          "Try visiting the locket reminisce page then run this script again!",
           "gray"
         );
       }
