@@ -297,6 +297,45 @@ LocketMonsters = /*#__PURE__*/function () {function LocketMonsters() {_classCall
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     function (
     monster)
     {
@@ -311,8 +350,8 @@ LocketMonsters = /*#__PURE__*/function () {function LocketMonsters() {_classCall
         }} catch (err) {_iterator.e(err);} finally {_iterator.f();}
 
       return locations;
-    });}_createClass(LocketMonsters, [{ key: "loadStuff", value: function loadStuff() {this.allZones = this.getAllZones();this.monsters = this.loadMonsterGroups();this.locketMonsters = this.getLocketMonsters();} }, { key: "getFullName", value: function getFullName(zoneName) {if (zoneName == null) {return zoneName;}var zone = this.allZones.get(zoneName.toLowerCase());if (zone == null || zone.parentZone == null) {return zoneName;}this.getFullName(zone.parentZone.id) + " " + zone.name;} }, { key: "loadMonsterZone", value: function loadMonsterZone(alreadyProcessed, monsterGroups, zone, groupName, note) {var zones = [zone];while (zones.length > 0) {var _zone = zones.pop();zones.push.apply(zones, _toConsumableArray(_zone.children));var _iterator2 = _createForOfIteratorHelper(_zone.locations),_step2;try {for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {var loc = _step2.value;var group = new MonsterGroup();group.groupName = (groupName || "") + this.getFullName(_zone.id) + ": " + loc;var _iterator3 = _createForOfIteratorHelper((0,external_kolmafia_namespaceObject.getMonsters)(loc)),_step3;try {for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {var _monster = _step3.value;if (!_monster.copyable || _monster.boss || (0,external_kolmafia_namespaceObject.containsText)(_monster.attributes, "ULTRARARE")) {continue;}var info = new MonsterInfo();info.monster = _monster;info.note = note;group.monsters.push(info);}} catch (err) {_iterator3.e(err);} finally {_iterator3.f();}if (group.monsters.length > 0) {monsterGroups.push(group);}}} catch (err) {_iterator2.e(err);} finally {_iterator2.f();}}} }, { key: "loadMonsterGroup", value: function loadMonsterGroup(alreadyProcessed, monsterGroups, monster, groupName, note) {if (monster == null || monster == external_kolmafia_namespaceObject.Monster.get("None")) {return;}if (!monster.copyable || monster.boss) {(0,external_kolmafia_namespaceObject.print)(monster + " is marked as a boss or no-copy, yet is in locket_monsters.txt. Is this a mistake?", "gray");}if (alreadyProcessed.includes(monster)) {(0,external_kolmafia_namespaceObject.print)("You have a duplicate entry for " + monster + " in your locket_monsters.txt");return;}var monsterInfo = new MonsterInfo();monsterInfo.monster = monster;monsterInfo.note = note;if (groupName != null) {var _group = monsterGroups.find((group) => group.groupName == groupName);if (_group != null) {_group.monsters.push(monsterInfo);return;}}var group = new MonsterGroup();group.monsters.push(monsterInfo);group.groupName = groupName;monsterGroups.push(group);} }, { key: "loadMonsterGroups", value: function loadMonsterGroups() {var buffer = (0,external_kolmafia_namespaceObject.fileToBuffer)("locket_monsters.txt");var monsters = [];var alreadyProcessed = [];buffer.split(/(\n|\r)+/).forEach((line) => {line = line.trim();if (line.length == 0 || line.startsWith("#")) {return;}var spl = line.split("\t");var groupName = spl[1];var note = spl[2] || "";var zone = this.allZones.get(spl[0].toLowerCase());if (zone != null) {this.loadMonsterZone(alreadyProcessed, monsters, zone, groupName, note);return;}try {var _monster2 = external_kolmafia_namespaceObject.Monster.get(spl[0]);this.loadMonsterGroup(alreadyProcessed, monsters, _monster2, groupName, note);} catch (_unused) {(0,external_kolmafia_namespaceObject.print)("Invalid monster/zone: " + spl[0], "red");return;}});return monsters;} }, { key: "getLocketMonsters", value: function getLocketMonsters() {var locketMonsters = Object.keys((0,external_kolmafia_namespaceObject.getLocketMonsters)()).map((m) => external_kolmafia_namespaceObject.Monster.get(m));var knownToHave = (0,external_kolmafia_namespaceObject.toInt)((0,external_kolmafia_namespaceObject.getProperty)(this.propertyNameKnownToHave)); // Add the fought
-      var _iterator4 = _createForOfIteratorHelper((0,external_kolmafia_namespaceObject.getProperty)("_locketMonstersFought").split(",").filter((m) => m.match(/[0-9]+/)).map((m) => (0,external_kolmafia_namespaceObject.toMonster)((0,external_kolmafia_namespaceObject.toInt)(m)))),_step4;try {for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {var _monster3 = _step4.value;if (locketMonsters.includes(_monster3)) {continue;}locketMonsters.push(_monster3);}} catch (err) {_iterator4.e(err);} finally {_iterator4.f();}var savedLocketMonsters = (0,external_kolmafia_namespaceObject.getProperty)(this.propertyName).split(",").filter((m) => m.match(/[0-9]+/)).map((m) => (0,external_kolmafia_namespaceObject.toMonster)((0,external_kolmafia_namespaceObject.toInt)(m)));var _iterator5 = _createForOfIteratorHelper(savedLocketMonsters),_step5;try {for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {var m = _step5.value;if (locketMonsters.includes(m)) {continue;}locketMonsters.push(m);}} catch (err) {_iterator5.e(err);} finally {_iterator5.f();}if (locketMonsters.length > savedLocketMonsters.length) {(0,external_kolmafia_namespaceObject.setProperty)(this.propertyName, locketMonsters.map((m) => (0,external_kolmafia_namespaceObject.toInt)(m)).join(","));if (knownToHave < locketMonsters.length) {(0,external_kolmafia_namespaceObject.setProperty)(this.propertyNameKnownToHave, locketMonsters.length.toString());}} else {locketMonsters = savedLocketMonsters;}return locketMonsters;} }, { key: "makeZoneString", value: function makeZoneString(string, monsterInfo) {var locationsTitle = "";var locations = this.getLocations(monsterInfo.monster);if (locations.length > 0) {var locationsStrings = locations.map((l) => this.getFullName(l.zone) + ": " + l);locationsTitle = (0,external_kolmafia_namespaceObject.entityEncode)(locationsStrings.join(", "));} else {locationsTitle = "No locations found";}if (monsterInfo.note.length > 0) {locationsTitle += " ~ Note: " + monsterInfo.note;}return "<font color='gray' title='" + locationsTitle + "'>" + string + "</font>";} }, { key: "printLocket", value:
+    });}_createClass(LocketMonsters, [{ key: "loadStuff", value: function loadStuff() {this.allZones = this.getAllZones();this.monsters = this.loadMonsterGroups();this.locketMonsters = this.getLocketMonsters();} }, { key: "getFullName", value: function getFullName(zoneName) {if (zoneName == null) {return zoneName;}var zone = this.allZones.get(zoneName.toLowerCase());if (zone == null) {return zoneName;}if (zone.parentZone == null || zone.parentZone.locations.length == 0) {return zone.name;}return this.getFullName(zone.parentZone.name) + " => " + zone.name;} }, { key: "loadMonsterZone", value: function loadMonsterZone(alreadyProcessed, monsterGroups, zone, groupName, note) {var zones = [zone];while (zones.length > 0) {var _zone = zones.pop();zones.push.apply(zones, _toConsumableArray(_zone.children));var _iterator2 = _createForOfIteratorHelper(_zone.locations),_step2;try {for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {var loc = _step2.value;var group = new MonsterGroup();group.groupName = (groupName || "") + this.getFullName(_zone.name) + " => " + loc;var _iterator3 = _createForOfIteratorHelper((0,external_kolmafia_namespaceObject.getMonsters)(loc)),_step3;try {for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {var _monster = _step3.value;if (!_monster.copyable || _monster.boss || (0,external_kolmafia_namespaceObject.containsText)(_monster.attributes, "ULTRARARE")) {continue;}var info = new MonsterInfo();info.monster = _monster;info.note = note;group.monsters.push(info);}} catch (err) {_iterator3.e(err);} finally {_iterator3.f();}if (group.monsters.length > 0) {monsterGroups.push(group);}}} catch (err) {_iterator2.e(err);} finally {_iterator2.f();}}} }, { key: "loadMonsterGroup", value: function loadMonsterGroup(alreadyProcessed, monsterGroups, monster, groupName, note) {if (monster == null || monster == external_kolmafia_namespaceObject.Monster.get("None")) {return;}if (!monster.copyable || monster.boss) {(0,external_kolmafia_namespaceObject.print)(monster + " is marked as a boss or no-copy, yet is in locket_monsters.txt. Is this a mistake?", "gray");}if (alreadyProcessed.includes(monster)) {(0,external_kolmafia_namespaceObject.print)("You have a duplicate entry for " + monster + " in your locket_monsters.txt");return;}var monsterInfo = new MonsterInfo();monsterInfo.monster = monster;monsterInfo.note = note;if (groupName != null) {var _group = monsterGroups.find((group) => group.groupName == groupName);if (_group != null) {_group.monsters.push(monsterInfo);return;}}var group = new MonsterGroup();group.monsters.push(monsterInfo);group.groupName = groupName;monsterGroups.push(group);} }, { key: "loadMonsterGroups", value: function loadMonsterGroups() {var buffer = (0,external_kolmafia_namespaceObject.fileToBuffer)("locket_monsters.txt");var monsters = [];var alreadyProcessed = [];buffer.split(/(\n|\r)+/).forEach((line) => {line = line.trim();if (line.length == 0 || line.startsWith("#")) {return;}var spl = line.split("\t");var toLoad = spl[0];var groupName = spl[1];var note = spl[2] || "";var zone;if (toLoad.toLowerCase() == "current zone" || toLoad.toLowerCase() == "zone") {toLoad = (0,external_kolmafia_namespaceObject.myLocation)().zone;} else if (toLoad.toLowerCase() == "parent zone") {toLoad = (0,external_kolmafia_namespaceObject.myLocation)().zone;zone = this.allZones.get(toLoad.toLowerCase());while (zone.parentZone != null) {zone = zone.parentZone;}toLoad = zone.id;}zone = this.allZones.get(toLoad.toLowerCase());if (zone != null) {this.loadMonsterZone(alreadyProcessed, monsters, zone, groupName, note);return;}try {var _monster2 = external_kolmafia_namespaceObject.Monster.get(toLoad);this.loadMonsterGroup(alreadyProcessed, monsters, _monster2, groupName, note);} catch (_unused) {(0,external_kolmafia_namespaceObject.print)("Invalid monster/zone: " + toLoad, "red");return;}});return monsters;} }, { key: "getLocketMonsters", value: function getLocketMonsters() {var locketMonsters = Object.keys((0,external_kolmafia_namespaceObject.getLocketMonsters)()).map((m) => external_kolmafia_namespaceObject.Monster.get(m));var knownToHave = (0,external_kolmafia_namespaceObject.toInt)((0,external_kolmafia_namespaceObject.getProperty)(this.propertyNameKnownToHave)); // Add the fought
+      var _iterator4 = _createForOfIteratorHelper((0,external_kolmafia_namespaceObject.getProperty)("_locketMonstersFought").split(",").filter((m) => m.match(/[0-9]+/)).map((m) => (0,external_kolmafia_namespaceObject.toMonster)((0,external_kolmafia_namespaceObject.toInt)(m)))),_step4;try {for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {var _monster3 = _step4.value;if (locketMonsters.includes(_monster3)) {continue;}locketMonsters.push(_monster3);}} catch (err) {_iterator4.e(err);} finally {_iterator4.f();}var savedLocketMonsters = (0,external_kolmafia_namespaceObject.getProperty)(this.propertyName).split(",").filter((m) => m.match(/[0-9]+/)).map((m) => (0,external_kolmafia_namespaceObject.toMonster)((0,external_kolmafia_namespaceObject.toInt)(m)));var _iterator5 = _createForOfIteratorHelper(savedLocketMonsters),_step5;try {for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {var m = _step5.value;if (locketMonsters.includes(m)) {continue;}locketMonsters.push(m);}} catch (err) {_iterator5.e(err);} finally {_iterator5.f();}if (locketMonsters.length > savedLocketMonsters.length) {var prop = (0,external_kolmafia_namespaceObject.getProperty)("logPreferenceChange");if (prop == "true") {(0,external_kolmafia_namespaceObject.print)("Reason we're disabling preference logging for a sec is due to spam", "gray");(0,external_kolmafia_namespaceObject.setProperty)("logPreferenceChange", "false");}(0,external_kolmafia_namespaceObject.setProperty)(this.propertyName, locketMonsters.map((m) => (0,external_kolmafia_namespaceObject.toInt)(m)).join(","));if (prop == "true") {(0,external_kolmafia_namespaceObject.setProperty)("logPreferenceChange", prop);}if (knownToHave < locketMonsters.length) {(0,external_kolmafia_namespaceObject.setProperty)(this.propertyNameKnownToHave, locketMonsters.length.toString());}} else {locketMonsters = savedLocketMonsters;}return locketMonsters;} }, { key: "makeZoneString", value: function makeZoneString(string, monsterInfo) {var locationsTitle = "";var locations = this.getLocations(monsterInfo.monster);if (locations.length > 0) {var locationsStrings = locations.map((l) => this.getFullName(l.zone) + ": " + l);locationsTitle = (0,external_kolmafia_namespaceObject.entityEncode)(locationsStrings.join(", "));} else {locationsTitle = "No locations found";}if (monsterInfo.note.length > 0) {locationsTitle += " ~ Note: " + monsterInfo.note;}return "<font color='gray' title='" + locationsTitle + "'>" + string + "</font>";} }, { key: "printLocket", value:
     function printLocket(limit) {
       this.loadStuff();
 
@@ -439,8 +478,12 @@ LocketMonsters = /*#__PURE__*/function () {function LocketMonsters() {_classCall
 
           var zone = new Zone();
           zone.id = spl[0];
-          zone.parentZone = zoneMap.get(spl[1]);
-          zone.name = spl[2];var _iterator10 = _createForOfIteratorHelper(
+          zone.parentZone = zoneMap.get(spl[1].toLowerCase());
+          zone.name = spl[2];
+
+          if (zone.parentZone != null) {
+            zone.parentZone.children.push(zone);
+          }var _iterator10 = _createForOfIteratorHelper(
 
           external_kolmafia_namespaceObject.Location.all()),_step10;try {for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {var loc = _step10.value;
               if (loc.zone != zone.id) {
@@ -451,6 +494,7 @@ LocketMonsters = /*#__PURE__*/function () {function LocketMonsters() {_classCall
             }} catch (err) {_iterator10.e(err);} finally {_iterator10.f();}
 
           zoneMap.set(zone.id.toLowerCase(), zone);
+          zoneMap.set(zone.name.toLowerCase(), zone);
         }} catch (err) {_iterator9.e(err);} finally {_iterator9.f();}
 
       return zoneMap;

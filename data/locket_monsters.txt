@@ -1,4 +1,7 @@
-# Monster Name/Zone	Group Name	Note about this group
+# In here you can define a Zone (Parent zones too!), or a monster.
+# You can also use "Location", "Current Zone"/"Zone" or "Parent Zone" to have it look at your current location.
+# Zone/Monster	Group Name	Note about this zone/monster
+
 sausage goblin
 screambat
 beanbat
