@@ -12,6 +12,7 @@ import {
   Location,
   getMonsters,
   containsText,
+  myLocation,
 } from "kolmafia";
 
 class MonsterInfo {
@@ -52,11 +53,15 @@ class LocketMonsters {
 
     let zone: Zone = this.allZones.get(zoneName.toLowerCase());
 
-    if (zone == null || zone.parentZone == null) {
+    if (zone == null) {
       return zoneName;
     }
 
-    this.getFullName(zone.parentZone.id) + " " + zone.name;
+    if (zone.parentZone == null || zone.parentZone.locations.length == 0) {
+      return zone.name;
+    }
+
+    return this.getFullName(zone.parentZone.name) + " => " + zone.name;
   }
 
   loadMonsterZone(
@@ -76,7 +81,7 @@ class LocketMonsters {
       for (let loc of zone.locations) {
         let group = new MonsterGroup();
         group.groupName =
-          (groupName || "") + this.getFullName(zone.id) + ": " + loc;
+          (groupName || "") + this.getFullName(zone.name) + " => " + loc;
 
         for (let monster of getMonsters(loc)) {
           if (
@@ -163,10 +168,30 @@ class LocketMonsters {
       }
 
       let spl = line.split("\t");
+      let toLoad = spl[0];
       let groupName = spl[1];
       let note = spl[2] || "";
 
-      let zone: Zone = this.allZones.get(spl[0].toLowerCase());
+      let zone: Zone;
+
+      if (
+        toLoad.toLowerCase() == "current zone" ||
+        toLoad.toLowerCase() == "zone"
+      ) {
+        toLoad = myLocation().zone;
+      } else if (toLoad.toLowerCase() == "parent zone") {
+        toLoad = myLocation().zone;
+
+        zone = this.allZones.get(toLoad.toLowerCase());
+
+        while (zone.parentZone != null) {
+          zone = zone.parentZone;
+        }
+
+        toLoad = zone.id;
+      }
+
+      zone = this.allZones.get(toLoad.toLowerCase());
 
       if (zone != null) {
         this.loadMonsterZone(alreadyProcessed, monsters, zone, groupName, note);
@@ -174,7 +199,7 @@ class LocketMonsters {
       }
 
       try {
-        let monster: Monster = Monster.get(spl[0]);
+        let monster: Monster = Monster.get(toLoad);
         this.loadMonsterGroup(
           alreadyProcessed,
           monsters,
@@ -183,7 +208,7 @@ class LocketMonsters {
           note
         );
       } catch {
-        print("Invalid monster/zone: " + spl[0], "red");
+        print("Invalid monster/zone: " + toLoad, "red");
         return;
       }
     });
@@ -224,10 +249,25 @@ class LocketMonsters {
     }
 
     if (locketMonsters.length > savedLocketMonsters.length) {
+      let prop = getProperty("logPreferenceChange");
+
+      if (prop == "true") {
+        print(
+          "Reason we're disabling preference logging for a sec is due to spam",
+          "gray"
+        );
+        setProperty("logPreferenceChange", "false");
+      }
+
       setProperty(
         this.propertyName,
         locketMonsters.map((m) => toInt(m)).join(",")
       );
+
+      if (prop == "true") {
+        setProperty("logPreferenceChange", prop);
+      }
+
       if (knownToHave < locketMonsters.length) {
         setProperty(
           this.propertyNameKnownToHave,
@@ -406,8 +446,12 @@ class LocketMonsters {
 
       let zone = new Zone();
       zone.id = spl[0];
-      zone.parentZone = zoneMap.get(spl[1]);
+      zone.parentZone = zoneMap.get(spl[1].toLowerCase());
       zone.name = spl[2];
+
+      if (zone.parentZone != null) {
+        zone.parentZone.children.push(zone);
+      }
 
       for (let loc of Location.all()) {
         if (loc.zone != zone.id) {
@@ -418,6 +462,7 @@ class LocketMonsters {
       }
 
       zoneMap.set(zone.id.toLowerCase(), zone);
+      zoneMap.set(zone.name.toLowerCase(), zone);
     }
 
     return zoneMap;
