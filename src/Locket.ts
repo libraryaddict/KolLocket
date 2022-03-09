@@ -106,6 +106,38 @@ class LocketMonsters {
     }
   }
 
+  loadMonsterLocation(
+    alreadyProcessed: Monster[],
+    monsterGroups: MonsterGroup[],
+    location: Location,
+    groupName: string,
+    note: string
+  ) {
+    let group = new MonsterGroup();
+    group.groupName =
+      (groupName || "") + this.getFullName(location.zone) + " => " + location;
+
+    for (let monster of getMonsters(location)) {
+      if (
+        !monster.copyable ||
+        monster.boss ||
+        containsText(monster.attributes, "ULTRARARE")
+      ) {
+        continue;
+      }
+
+      let info = new MonsterInfo();
+      info.monster = monster;
+      info.note = note;
+
+      group.monsters.push(info);
+    }
+
+    if (group.monsters.length > 0) {
+      monsterGroups.push(group);
+    }
+  }
+
   loadMonsterGroup(
     alreadyProcessed: Monster[],
     monsterGroups: MonsterGroup[],
@@ -189,6 +221,15 @@ class LocketMonsters {
         }
 
         toLoad = zone.id;
+      } else if (toLoad.toLowerCase() == "location") {
+        this.loadMonsterLocation(
+          alreadyProcessed,
+          monsters,
+          myLocation(),
+          groupName,
+          note
+        );
+        return;
       }
 
       zone = this.allZones.get(toLoad.toLowerCase());
