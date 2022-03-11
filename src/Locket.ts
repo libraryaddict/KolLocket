@@ -13,6 +13,7 @@ import {
   getMonsters,
   containsText,
   myLocation,
+  getLocationMonsters,
 } from "kolmafia";
 
 class MonsterInfo {
@@ -80,8 +81,13 @@ class LocketMonsters {
 
       for (let loc of zone.locations) {
         let group = new MonsterGroup();
-        group.groupName =
-          (groupName || "") + this.getFullName(zone.name) + " => " + loc;
+        group.groupName = (groupName || "") + this.getFullName(zone.name);
+
+        if (zone.name) {
+          group.groupName += " => ";
+        }
+
+        group.groupName += loc;
 
         for (let monster of getMonsters(loc)) {
           if (
@@ -106,6 +112,32 @@ class LocketMonsters {
     }
   }
 
+  isLocketable(monster: Monster): boolean {
+    return (
+      !monster.boss &&
+      monster.copyable &&
+      !containsText(monster.attributes, "ULTRARARE")
+    );
+  }
+
+  loadLocationless(): Monster[] {
+    let monstersFound: Monster[] = [];
+
+    for (let l of Location.all()) {
+      for (let m of Object.keys(getLocationMonsters(l)).map((m) =>
+        Monster.get(m)
+      )) {
+        monstersFound.push(m);
+      }
+    }
+
+    let monsters: Monster[] = Monster.all().filter(
+      (m) => !monstersFound.includes(m) && this.isLocketable(m)
+    );
+
+    return monsters;
+  }
+
   loadMonsterLocation(
     alreadyProcessed: Monster[],
     monsterGroups: MonsterGroup[],
@@ -114,15 +146,24 @@ class LocketMonsters {
     note: string
   ) {
     let group = new MonsterGroup();
-    group.groupName =
-      (groupName || "") + this.getFullName(location.zone) + " => " + location;
+    group.groupName = (groupName || "") + this.getFullName(location.zone);
 
-    for (let monster of getMonsters(location)) {
-      if (
-        !monster.copyable ||
-        monster.boss ||
-        containsText(monster.attributes, "ULTRARARE")
-      ) {
+    if (location.zone) {
+      group.groupName += " => ";
+    }
+
+    let monsters: Monster[] = [];
+
+    if (location == Location.get("None")) {
+      group.groupName += "Locationless";
+      monsters = this.loadLocationless();
+    } else {
+      group.groupName += location;
+      monsters = getMonsters(location);
+    }
+
+    for (let monster of monsters) {
+      if (!this.isLocketable(monster)) {
         continue;
       }
 
@@ -226,6 +267,19 @@ class LocketMonsters {
           alreadyProcessed,
           monsters,
           myLocation(),
+          groupName,
+          note
+        );
+        return;
+      } else if (
+        toLoad.toLowerCase() == "wanderer" ||
+        toLoad.toLowerCase() == "wanderers" ||
+        toLoad == "none"
+      ) {
+        this.loadMonsterLocation(
+          alreadyProcessed,
+          monsters,
+          Location.get("None"),
           groupName,
           note
         );
