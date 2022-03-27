@@ -40,9 +40,28 @@ class LocketMonsters {
   allZones: Map<string, Zone>;
   monsters: MonsterGroup[];
   locketMonsters: Monster[];
+  invalidMonsters: Monster[];
+
+  getInvalidMonsters(): Monster[] {
+    let buffer = fileToBuffer("nowish_monsters.txt").split("\n");
+    let monsters: Monster[] = [];
+
+    for (let line of buffer) {
+      if (line.startsWith("#") || line.length == 0) {
+        continue;
+      }
+
+      let monster = toMonster(line);
+
+      monsters.push(monster);
+    }
+
+    return monsters;
+  }
 
   loadStuff() {
     this.allZones = this.getAllZones();
+    this.invalidMonsters = this.getInvalidMonsters();
     this.monsters = this.loadMonsterGroups();
     this.locketMonsters = this.getLocketMonsters();
   }
@@ -90,11 +109,7 @@ class LocketMonsters {
         group.groupName += loc;
 
         for (let monster of getMonsters(loc)) {
-          if (
-            !monster.copyable ||
-            monster.boss ||
-            containsText(monster.attributes, "ULTRARARE")
-          ) {
+          if (!this.isLocketable(monster)) {
             continue;
           }
 
@@ -116,7 +131,9 @@ class LocketMonsters {
     return (
       !monster.boss &&
       monster.copyable &&
-      !containsText(monster.attributes, "ULTRARARE")
+      !containsText(monster.attributes, "ULTRARARE") &&
+      !this.invalidMonsters.includes(monster) &&
+      monster.baseHp < 50000 // The health is probably a bad idea, but filters great!
     );
   }
 
@@ -295,6 +312,7 @@ class LocketMonsters {
 
       try {
         let monster: Monster = Monster.get(toLoad);
+
         this.loadMonsterGroup(
           alreadyProcessed,
           monsters,
