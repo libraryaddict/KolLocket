@@ -14,7 +14,7 @@ lynyrd
 Ghost	Ascension Musts	White Pixels!
 Mountain Man	Ascension Musts	Ore for the trapper!
 Fantasy Bandit	Ascension Musts	If you can copy this 5x, loot token!
-forest spirit	Ascension Musts	White Pixels!
+forest spirit	Ascension Musts	Create a muculent machete!
 
 Astronomer	Monsters nice to have
 Camel's Toe	Monsters nice to have
