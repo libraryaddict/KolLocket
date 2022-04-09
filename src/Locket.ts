@@ -109,7 +109,10 @@ class LocketMonsters {
         group.groupName += loc;
 
         for (let monster of getMonsters(loc)) {
-          if (!this.isLocketable(monster)) {
+          if (
+            alreadyProcessed.includes(monster) ||
+            !this.isLocketable(monster)
+          ) {
             continue;
           }
 
@@ -155,6 +158,32 @@ class LocketMonsters {
     return monsters;
   }
 
+  loadAllMonsters(
+    alreadyProcessed: Monster[],
+    monsterGroups: MonsterGroup[],
+    groupName: string,
+    note: string
+  ) {
+    let group = new MonsterGroup();
+    group.groupName = (groupName || "") + "All Monsters";
+
+    for (let monster of Monster.all()) {
+      if (alreadyProcessed.includes(monster) || !this.isLocketable(monster)) {
+        continue;
+      }
+
+      let info = new MonsterInfo();
+      info.monster = monster;
+      info.note = note;
+
+      group.monsters.push(info);
+    }
+
+    if (group.monsters.length > 0) {
+      monsterGroups.push(group);
+    }
+  }
+
   loadMonsterLocation(
     alreadyProcessed: Monster[],
     monsterGroups: MonsterGroup[],
@@ -180,7 +209,7 @@ class LocketMonsters {
     }
 
     for (let monster of monsters) {
-      if (!this.isLocketable(monster)) {
+      if (alreadyProcessed.includes(monster) || !this.isLocketable(monster)) {
         continue;
       }
 
@@ -293,6 +322,15 @@ class LocketMonsters {
         toLoad.toLowerCase() == "wanderers" ||
         toLoad == "none"
       ) {
+        this.loadMonsterLocation(
+          alreadyProcessed,
+          monsters,
+          Location.get("None"),
+          groupName,
+          note
+        );
+        return;
+      } else if (toLoad == "*" || toLoad == "all") {
         this.loadMonsterLocation(
           alreadyProcessed,
           monsters,

@@ -1,5 +1,5 @@
 # In here you can define a Zone (Parent zones too!), or a monster.
-# You can also use "Location", "Current Zone"/"Zone" or "Parent Zone" to have it look at your current location.
+# You can also use "Location", "Current Zone"/"Zone" or "Parent Zone" to have it look at your current location. Or * or 'all' to do everything.
 # Zone/Monster	Group Name	Note about this zone/monster
 
 sausage goblin
