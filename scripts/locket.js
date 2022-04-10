@@ -652,6 +652,14 @@ LocketMonsters = /*#__PURE__*/function () {function LocketMonsters() {_classCall
 
 
 function main() {var limit = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "10";
+  if (limit.match(/^\d+$/) == null) {
+    (0,external_kolmafia_namespaceObject.print)(
+    "Please only provide a number to filter how many are displayed, if you want to control what is displayed, look in locket_monsters.txt. This is laziness.",
+    "red");
+
+    return;
+  }
+
   new LocketMonsters().printLocket((0,external_kolmafia_namespaceObject.toInt)(limit));
 }
 var __webpack_export_target__ = exports;
