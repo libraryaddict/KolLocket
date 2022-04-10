@@ -621,5 +621,13 @@ class LocketMonsters {
 }
 
 export function main(limit: string = "10") {
+  if (limit.match(/^\d+$/) == null) {
+    print(
+      "Please only provide a number to filter how many are displayed, if you want to control what is displayed, look in locket_monsters.txt. This is laziness.",
+      "red"
+    );
+    return;
+  }
+
   new LocketMonsters().printLocket(toInt(limit));
 }
