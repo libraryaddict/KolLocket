@@ -46,84 +46,173 @@ kid who is too old to be Trick-or-Treating	Halloween Monsters
 suburban security civilian	Halloween Monsters
 vandal kid	Halloween Monsters
 
-Bullet Bill	Monsters for Grey You Path
+gaunt ghuol	Monsters for Grey You Path
+plastered frat orc	Monsters for Grey You Path
 werecougar	Monsters for Grey You Path
-Claybender Sorcerer Ghost	Monsters for Grey You Path
-pine bat	Monsters for Grey You Path
+Battlie Knight Ghost	Monsters for Grey You Path
+batrat	Monsters for Grey You Path
 ratbat	Monsters for Grey You Path
-black panther	Monsters for Grey You Path
-Knob Goblin Elite Guard	Monsters for Grey You Path
-Knob Goblin Harem Girl	Monsters for Grey You Path
-Cobb's Knob oven	Monsters for Grey You Path
+angry bugbear	Monsters for Grey You Path
+revolving bugbear	Monsters for Grey You Path
+Renaissance Giant	Monsters for Grey You Path
+Possibility Giant	Monsters for Grey You Path
+swarm of Knob lice	Monsters for Grey You Path
+Knob Goblin Very Mad Scientist	Monsters for Grey You Path
 Knob Goblin Alchemist	Monsters for Grey You Path
+Knob Goblin Bean Counter	Monsters for Grey You Path
 Knob Goblin MBA	Monsters for Grey You Path
+Mob Penguin Capo	Monsters for Grey You Path
 fan dancer	Monsters for Grey You Path
-mind flayer	Monsters for Grey You Path
-eXtreme cross-country hip	Monsters for Grey You Pathpy
-drunk goat	Monsters for Grey You Path
-baseball bat	Monsters for Grey You Path
+G imp	Monsters for Grey You Path
+demoninja	Monsters for Grey You Path
+L imp	Monsters for Grey You Path
+senile lihc	Monsters for Grey You Path
+basic lihc	Monsters for Grey You Path
+fluffy bunny	Monsters for Grey You Path
+tapdancing skeleton	Monsters for Grey You Path
 zombie waltzers	Monsters for Grey You Path
+toilet papergeist	Monsters for Grey You Path
 malevolent hair clog	Monsters for Grey You Path
-animated ornate nightstand	Monsters for Grey You Path
-pooltergeist	Monsters for Grey You Path
-Steam Elemental	Monsters for Grey You Path
+skeletal hamster	Monsters for Grey You Path
 anglerbush	Monsters for Grey You Path
-cubist bull	Monsters for Grey You Path
-demonic icebox	Monsters for Grey You Path
-jacob's adder	Monsters for Grey You Path
-banshee librarian	Monsters for Grey You Path
-spooky music box	Monsters for Grey You Path
+fiendish can of asparagus	Monsters for Grey You Path
 undead elbow macaroni	Monsters for Grey You Path
+sheet ghost	Monsters for Grey You Path
 stuffed moose head	Monsters for Grey You Path
+mad wino	Monsters for Grey You Path
 possessed wine rack	Monsters for Grey You Path
+pygmy shaman	Monsters for Grey You Path
 Pygmy Witch Lawyer	Monsters for Grey You Path
 drunk pygmy	Monsters for Grey You Path
-pygmy janitor	Monsters for Grey You Path
-snow queen	Monsters for Grey You Path
-suckubus	Monsters for Grey You Path
-Flock of Stab-bats	Monsters for Grey You Path
-dopey 7-Foot Dwarf	Monsters for Grey You Path
-Ninja Snowman Weaponmaster	Monsters for Grey You Path
-Pr Imp	Monsters for Grey You Path
-crêep	Monsters for Grey You Path
-BASIC Elemental	Monsters for Grey You Path
-Carnivorous Moxie Weed	Monsters for Grey You Path
-Spectral Jellyfish	Monsters for Grey You Path
-Shifty pirate	Monsters for Grey You Path
-oil slick	Monsters for Grey You Path
-junksprite bender	Monsters for Grey You Path
-Sub-Assistant Knob Mad Scientist	Monsters for Grey You Path
-sewer snake with a sewer snake in it	Monsters for Grey You Path
-remaindered skeleton	Monsters for Grey You Path
-rushing bum	Monsters for Grey You Path
-smut orc screwer	Monsters for Grey You Path
-raging bull	Monsters for Grey You Path
-spooky vampire	Monsters for Grey You Path
-Big Wheelin' Twins	Monsters for Grey You Path
-lihc	Monsters for Grey You Path
-me4t begZ0r	Monsters for Grey You Path
-white lion	Monsters for Grey You Path
-fleet woodsman	Monsters for Grey You Path
-swarm of fire ants	Monsters for Grey You Path
-black magic woman	Monsters for Grey You Path
-Alphabet Giant	Monsters for Grey You Path
-Renaissance Giant	Monsters for Grey You Path
-Raver Giant	Monsters for Grey You Path
-Mob Penguin Capo	Monsters for Grey You Path
-coaltergeist	Monsters for Grey You Path
-mad wino	Monsters for Grey You Path
-pygmy shaman	Monsters for Grey You Path
 pygmy orderlies	Monsters for Grey You Path
-pygmy headhunter	Monsters for Grey You Path
-pygmy blowgunner	Monsters for Grey You Path
-Little man in the canoe	Monsters for Grey You Path
 One-Eyed Willie	Monsters for Grey You Path
+upgraded ram	Monsters for Grey You Path
+snow queen	Monsters for Grey You Path
 Bob Racecar	Monsters for Grey You Path
 Racecar Bob	Monsters for Grey You Path
+Flock of Stab-bats	Monsters for Grey You Path
+ghost miner	Monsters for Grey You Path
+Ninja Snowman Janitor	Monsters for Grey You Path
+Ninja Snowman Weaponmaster	Monsters for Grey You Path
+CH imp	Monsters for Grey You Path
+Pr Imp	Monsters for Grey You Path
+gingerbread murderer	Monsters for Grey You Path
+crêep	Monsters for Grey You Path
+Booze Giant	Monsters for Grey You Path
+Spectral Jellyfish	Monsters for Grey You Path
 tomb asp	Monsters for Grey You Path
-Irritating Series of Random Encounters	Monsters for Grey You Path
-Iiti Kitty	Monsters for Grey You Path
+tomb servant	Monsters for Grey You Path
+junksprite sharpener	Monsters for Grey You Path
+junksprite bender	Monsters for Grey You Path
 1335 HaXx0r	Monsters for Grey You Path
+me4t begZ0r	Monsters for Grey You Path
+Zol	Monsters for Grey You Path
+Bullet Bill	Monsters for Grey You Path
+swarm of fire ants	Monsters for Grey You Path
+plaque of locusts	Monsters for Grey You Path
+magical fruit bat	Monsters for Grey You Path
+beefy bodyguard bat	Monsters for Grey You Path
+Alphabet Giant	Monsters for Grey You Path
+Fitness Giant	Monsters for Grey You Path
+Knob Goblin Madam	Monsters for Grey You Path
+Knob Goblin Harem Girl	Monsters for Grey You Path
+P imp	Monsters for Grey You Path
+Hellion	Monsters for Grey You Path
+W imp	Monsters for Grey You Path
+grave rober zmobie	Monsters for Grey You Path
+gluttonous ghuol	Monsters for Grey You Path
+sabre-toothed goat	Monsters for Grey You Path
+drunk goat	Monsters for Grey You Path
+vampire bat	Monsters for Grey You Path
+baseball bat	Monsters for Grey You Path
+chalkdust wraith	Monsters for Grey You Path
+pooltergeist	Monsters for Grey You Path
+guy with a pitchfork, and his wife	Monsters for Grey You Path
+cubist bull	Monsters for Grey You Path
+possessed silverware drawer	Monsters for Grey You Path
+demonic icebox	Monsters for Grey You Path
+possessed toy chest	Monsters for Grey You Path
+spooky music box	Monsters for Grey You Path
+pygmy headhunter	Monsters for Grey You Path
+craven carven raven	Monsters for Grey You Path
+stone temple pirate	Monsters for Grey You Path
+baa-relief sheep	Monsters for Grey You Path
+Grass Elemental	Monsters for Grey You Path
+Carnivorous Moxie Weed	Monsters for Grey You Path
+oil baron	Monsters for Grey You Path
+oil slick	Monsters for Grey You Path
+swarm of skulls	Monsters for Grey You Path
+remaindered skeleton	Monsters for Grey You Path
+drunken half-orc hobo	Monsters for Grey You Path
+hung-over half-orc hobo	Monsters for Grey You Path
+rushing bum	Monsters for Grey You Path
+smut orc pipelayer	Monsters for Grey You Path
+smut orc screwer	Monsters for Grey You Path
+Gnefarious gnome	Monsters for Grey You Path
+vicious gnauga	Monsters for Grey You Path
+Iiti Kitty	Monsters for Grey You Path
+tomb servant	Monsters for Grey You Path
+whitesnake	Monsters for Grey You Path
+white lion	Monsters for Grey You Path
+fleet woodsman	Monsters for Grey You Path
+Blue Oyster cultist	Monsters for Grey You Path
+Claybender Sorcerer Ghost	Monsters for Grey You Path
+albino bat	Monsters for Grey You Path
+pine bat	Monsters for Grey You Path
+beanbat	Monsters for Grey You Path
+black magic woman	Monsters for Grey You Path
+black panther	Monsters for Grey You Path
+Raver Giant	Monsters for Grey You Path
+Punk Rock Giant	Monsters for Grey You Path
+Knob Goblin Master Chef	Monsters for Grey You Path
+Cobb's Knob oven	Monsters for Grey You Path
+Fallen Archfiend	Monsters for Grey You Path
+corpulent zobmie	Monsters for Grey You Path
+toothy sklelton	Monsters for Grey You Path
+party skelteon	Monsters for Grey You Path
+swarm of killer bees	Monsters for Grey You Path
+eXtreme Orcish snowboarder	Monsters for Grey You Path
+eXtreme cross-country hippy	Monsters for Grey You Path
+animated rustic nightstand	Monsters for Grey You Path
+animated ornate nightstand	Monsters for Grey You Path
+coaltergeist	Monsters for Grey You Path
+Steam Elemental	Monsters for Grey You Path
+model skeleton	Monsters for Grey You Path
+jacob's adder	Monsters for Grey You Path
+bookbat	Monsters for Grey You Path
+banshee librarian	Monsters for Grey You Path
+pygmy blowgunner	Monsters for Grey You Path
+pygmy janitor	Monsters for Grey You Path
+serialbus	Monsters for Grey You Path
+suckubus	Monsters for Grey You Path
+grumpy 7-Foot Dwarf	Monsters for Grey You Path
+dopey 7-Foot Dwarf	Monsters for Grey You Path
+Knob Goblin Mutant	Monsters for Grey You Path
+BASIC Elemental	Monsters for Grey You Path
+blur	Monsters for Grey You Path
+swarm of scarab beatles	Monsters for Grey You Path
+sassy pirate	Monsters for Grey You Path
+Shifty pirate	Monsters for Grey You Path
+sleeping Knob Goblin Guard	Monsters for Grey You Path
+Sub-Assistant Knob Mad Scientist	Monsters for Grey You Path
+dire pigeon	Monsters for Grey You Path
+sewer snake with a sewer snake in it	Monsters for Grey You Path
+Irritating Series of Random Encounters	Monsters for Grey You Path
+spunky princess	Monsters for Grey You Path
+Burly Sidekick	Monsters for Grey You Path
+Quiet Healer	Monsters for Grey You Path
+warwelf	Monsters for Grey You Path
+spooky vampire	Monsters for Grey You Path
+bubblemint twins	Monsters for Grey You Path
+Big Wheelin' Twins	Monsters for Grey You Path
+grave rober	Monsters for Grey You Path
+lihc	Monsters for Grey You Path
+mind flayer	Monsters for Grey You Path
+Little man in the canoe	Monsters for Grey You Path
+forest spirit	Monsters for Grey You Path
+Cloud of disembodied whiskers	Monsters for Grey You Path
+irate mariachi	Monsters for Grey You Path
+raging bull	Monsters for Grey You Path
 
 Black Crayon Beast	Black Crayon Monsters	Honestly we only need crayon monster..
 Black Crayon Beetle	Black Crayon Monsters	Honestly we only need crayon monster..
