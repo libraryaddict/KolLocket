@@ -1,3 +1,4 @@
+import { canAdv } from "canadv.ash";
 import {
   fileToBuffer,
   getLocketMonsters,
@@ -14,469 +15,192 @@ import {
   containsText,
   myLocation,
   getLocationMonsters,
+  toString,
+  toJson,
 } from "kolmafia";
+import { LocketUtils } from "./LocketUtils";
+import { LocketLoader, MonsterGroup, MonsterInfo } from "./MonsterLoader";
 
-class MonsterInfo {
-  monster: Monster;
-  note: string;
-}
-
-class MonsterGroup {
-  monsters: MonsterInfo[] = [];
-  groupName: string;
-}
-
-class Zone {
-  parentZone: Zone;
-  children: Zone[] = [];
-  id: string;
-  name: string;
-  locations: Location[] = [];
-}
+type LocketSource = (filter?: string) => void;
 
 class LocketMonsters {
-  propertyName: string = "_locketMonstersSaved";
-  propertyNameKnownToHave = "locketAmountKnownToHave";
-  allZones: Map<string, Zone>;
-  monsters: MonsterGroup[];
   locketMonsters: Monster[];
-  invalidMonsters: Monster[];
+  loader: LocketLoader = new LocketLoader();
+  locketSources: [string[], LocketSource][] = [];
 
-  getInvalidMonsters(): Monster[] {
-    let buffer = fileToBuffer("nowish_monsters.txt").split("\n");
-    let monsters: Monster[] = [];
+  constructor() {
+    this.locketMonsters = LocketUtils.getLocketMonsters();
 
-    for (let line of buffer) {
-      if (line.startsWith("#") || line.length == 0) {
-        continue;
-      }
+    const note: string = "";
 
-      let monster = toMonster(line);
+    this.locketSources.push([
+      ["file", "data"],
+      () => {
+        return this.loader.loadDataFile();
+      },
+    ]);
 
-      monsters.push(monster);
-    }
+    this.locketSources.push([
+      ["zone", "czone", "current zone", "myzone"],
+      () => {
+        return this.loader.loadZone(
+          myLocation().zone,
+          "Current Zone: ",
+          "note"
+        );
+      },
+    ]);
 
-    return monsters;
-  }
+    this.locketSources.push([
+      ["pzone", "parent zone", "parent"],
+      () => {
+        let toLoad = myLocation().zone;
 
-  loadStuff() {
-    this.allZones = this.getAllZones();
-    this.invalidMonsters = this.getInvalidMonsters();
-    this.monsters = this.loadMonsterGroups();
-    this.locketMonsters = this.getLocketMonsters();
-  }
-
-  getFullName(zoneName: string): string {
-    if (zoneName == null) {
-      return zoneName;
-    }
-
-    let zone: Zone = this.allZones.get(zoneName.toLowerCase());
-
-    if (zone == null) {
-      return zoneName;
-    }
-
-    if (zone.parentZone == null || zone.parentZone.locations.length == 0) {
-      return zone.name;
-    }
-
-    return this.getFullName(zone.parentZone.name) + " => " + zone.name;
-  }
-
-  loadMonsterZone(
-    alreadyProcessed: Monster[],
-    monsterGroups: MonsterGroup[],
-    zone: Zone,
-    groupName: string,
-    note: string
-  ) {
-    let zones: Zone[] = [zone];
-
-    while (zones.length > 0) {
-      let zone = zones.pop();
-
-      zones.push(...zone.children);
-
-      for (let loc of zone.locations) {
-        let group = new MonsterGroup();
-        group.groupName = (groupName || "") + this.getFullName(zone.name);
-
-        if (zone.name) {
-          group.groupName += " => ";
-        }
-
-        group.groupName += loc;
-
-        for (let monster of getMonsters(loc)) {
-          if (
-            alreadyProcessed.includes(monster) ||
-            !this.isLocketable(monster)
-          ) {
-            continue;
-          }
-
-          let info = new MonsterInfo();
-          info.monster = monster;
-          info.note = note;
-
-          group.monsters.push(info);
-        }
-
-        if (group.monsters.length > 0) {
-          monsterGroups.push(group);
-        }
-      }
-    }
-  }
-
-  isLocketable(monster: Monster): boolean {
-    return (
-      !monster.boss &&
-      monster.copyable &&
-      !containsText(monster.attributes, "ULTRARARE") &&
-      !this.invalidMonsters.includes(monster) &&
-      monster.baseHp < 50000 // The health is probably a bad idea, but filters great!
-    );
-  }
-
-  loadLocationless(): Monster[] {
-    let monstersFound: Monster[] = [];
-
-    for (let l of Location.all()) {
-      for (let m of Object.keys(getLocationMonsters(l)).map((m) =>
-        Monster.get(m)
-      )) {
-        monstersFound.push(m);
-      }
-    }
-
-    let monsters: Monster[] = Monster.all().filter(
-      (m) => !monstersFound.includes(m) && this.isLocketable(m)
-    );
-
-    return monsters;
-  }
-
-  loadAllMonsters(
-    alreadyProcessed: Monster[],
-    monsterGroups: MonsterGroup[],
-    groupName: string,
-    note: string
-  ) {
-    let group = new MonsterGroup();
-    group.groupName = (groupName || "") + "All Monsters";
-
-    for (let monster of Monster.all()) {
-      if (alreadyProcessed.includes(monster) || !this.isLocketable(monster)) {
-        continue;
-      }
-
-      let info = new MonsterInfo();
-      info.monster = monster;
-      info.note = note;
-
-      group.monsters.push(info);
-    }
-
-    if (group.monsters.length > 0) {
-      monsterGroups.push(group);
-    }
-  }
-
-  loadMonsterLocation(
-    alreadyProcessed: Monster[],
-    monsterGroups: MonsterGroup[],
-    location: Location,
-    groupName: string,
-    note: string
-  ) {
-    let group = new MonsterGroup();
-    group.groupName = (groupName || "") + this.getFullName(location.zone);
-
-    if (location.zone) {
-      group.groupName += " => ";
-    }
-
-    let monsters: Monster[] = [];
-
-    if (location == Location.get("None")) {
-      group.groupName += "Locationless";
-      monsters = this.loadLocationless();
-    } else {
-      group.groupName += location;
-      monsters = getMonsters(location);
-    }
-
-    for (let monster of monsters) {
-      if (alreadyProcessed.includes(monster) || !this.isLocketable(monster)) {
-        continue;
-      }
-
-      let info = new MonsterInfo();
-      info.monster = monster;
-      info.note = note;
-
-      group.monsters.push(info);
-    }
-
-    if (group.monsters.length > 0) {
-      monsterGroups.push(group);
-    }
-  }
-
-  loadMonsterGroup(
-    alreadyProcessed: Monster[],
-    monsterGroups: MonsterGroup[],
-    monster: Monster,
-    groupName: string,
-    note: string
-  ) {
-    if (monster == null || monster == Monster.get("None")) {
-      return;
-    }
-
-    if (!monster.copyable || monster.boss) {
-      print(
-        monster +
-          " is marked as a boss or no-copy, yet is in locket_monsters.txt. Is this a mistake?",
-        "gray"
-      );
-    }
-
-    if (alreadyProcessed.includes(monster)) {
-      print(
-        "You have a duplicate entry for " +
-          monster +
-          " in your locket_monsters.txt"
-      );
-      return;
-    }
-
-    let monsterInfo = new MonsterInfo();
-    monsterInfo.monster = monster;
-    monsterInfo.note = note;
-
-    if (groupName != null) {
-      let group = monsterGroups.find((group) => group.groupName == groupName);
-
-      if (group != null) {
-        group.monsters.push(monsterInfo);
-        return;
-      }
-    }
-
-    let group = new MonsterGroup();
-    group.monsters.push(monsterInfo);
-    group.groupName = groupName;
-
-    monsterGroups.push(group);
-  }
-
-  loadMonsterGroups(): MonsterGroup[] {
-    let buffer = fileToBuffer("locket_monsters.txt");
-
-    let monsters: MonsterGroup[] = [];
-    let alreadyProcessed: Monster[] = [];
-
-    buffer.split(/(\n|\r)+/).forEach((line) => {
-      line = line.trim();
-
-      if (line.length == 0 || line.startsWith("#")) {
-        return;
-      }
-
-      let spl = line.split("\t");
-      let toLoad = spl[0];
-      let groupName = spl[1];
-      let note = spl[2] || "";
-
-      let zone: Zone;
-
-      if (
-        toLoad.toLowerCase() == "current zone" ||
-        toLoad.toLowerCase() == "zone"
-      ) {
-        toLoad = myLocation().zone;
-      } else if (toLoad.toLowerCase() == "parent zone") {
-        toLoad = myLocation().zone;
-
-        zone = this.allZones.get(toLoad.toLowerCase());
+        let zone = LocketUtils.getZones().get(toLoad.toLowerCase());
 
         while (zone.parentZone != null) {
           zone = zone.parentZone;
         }
 
-        toLoad = zone.id;
-      } else if (toLoad.toLowerCase() == "location") {
-        this.loadMonsterLocation(
-          alreadyProcessed,
-          monsters,
+        return this.loader.loadZone(zone.id, zone.id + ": ", note);
+      },
+    ]);
+
+    this.locketSources.push([
+      ["location", "loc", "myloc"],
+      () => {
+        return this.loader.loadMonsterLocation(
           myLocation(),
-          groupName,
+          myLocation() + " ",
           note
         );
-        return;
-      } else if (
-        toLoad.toLowerCase() == "wanderer" ||
-        toLoad.toLowerCase() == "wanderers" ||
-        toLoad == "none"
-      ) {
-        this.loadMonsterLocation(
-          alreadyProcessed,
-          monsters,
+      },
+    ]);
+
+    this.locketSources.push([
+      ["wanderers", "wanderer", "zoneless"],
+      () => {
+        return this.loader.loadMonsterLocation(
           Location.get("None"),
-          groupName,
+          "Wanderers: ",
           note
         );
-        return;
-      } else if (toLoad == "*" || toLoad == "all") {
-        this.loadMonsterLocation(
-          alreadyProcessed,
-          monsters,
-          Location.get("None"),
-          groupName,
+      },
+    ]);
+
+    this.locketSources.push([
+      ["all", "everything", "*"],
+      () => {
+        this.loader.hideNotInLocation = false;
+        return this.loader.loadMonsterLocation(null, "All ", note);
+      },
+    ]);
+
+    this.locketSources.push([
+      ["canadv", "available", "adv"],
+      () => {
+        for (let loc of Location.all()) {
+          if (!canAdv(loc)) {
+            continue;
+          }
+
+          this.loader.loadMonsterLocation(loc, "Can Adv: ", note);
+        }
+      },
+    ]);
+
+    this.locketSources.push([
+      Location.all()
+        .filter((l) => getMonsters(l).length > 0)
+        .map((l) => l.toString()),
+      (name) => {
+        this.loader.loadMonsterLocation(
+          Location.get(name),
+          Location.get(name) + ": ",
           note
         );
-        return;
-      }
-
-      zone = this.allZones.get(toLoad.toLowerCase());
-
-      if (zone != null) {
-        this.loadMonsterZone(alreadyProcessed, monsters, zone, groupName, note);
-        return;
-      }
-
-      try {
-        let monster: Monster = Monster.get(toLoad);
-
-        this.loadMonsterGroup(
-          alreadyProcessed,
-          monsters,
-          monster,
-          groupName,
-          note
-        );
-      } catch {
-        print("Invalid monster/zone: " + toLoad, "red");
-        return;
-      }
-    });
-
-    return monsters;
+      },
+    ]);
   }
 
-  getLocketMonsters() {
-    let locketMonsters: Monster[] = Object.keys(getLocketMonsters()).map((m) =>
-      Monster.get(m)
+  loadData(origSource: string): boolean {
+    const source = origSource.toLowerCase();
+
+    for (let s of this.locketSources) {
+      if (!s[0].includes(source)) {
+        continue;
+      }
+
+      s[1].call(this, source);
+      return true;
+    }
+
+    print(
+      "Unable to find something to load by the name of '" +
+        origSource +
+        "'. Provide 'help' to get valid filters",
+      "red"
     );
 
-    let knownToHave = toInt(getProperty(this.propertyNameKnownToHave));
-
-    // Add the fought
-    for (let monster of getProperty("_locketMonstersFought")
-      .split(",")
-      .filter((m) => m.match(/[0-9]+/))
-      .map((m) => toMonster(toInt(m)))) {
-      if (locketMonsters.includes(monster)) {
-        continue;
-      }
-
-      locketMonsters.push(monster);
-    }
-
-    let savedLocketMonsters: Monster[] = getProperty(this.propertyName)
-      .split(",")
-      .filter((m) => m.match(/[0-9]+/))
-      .map((m) => toMonster(toInt(m)));
-
-    for (let m of savedLocketMonsters) {
-      if (locketMonsters.includes(m)) {
-        continue;
-      }
-
-      locketMonsters.push(m);
-    }
-
-    if (locketMonsters.length > savedLocketMonsters.length) {
-      let prop = getProperty("logPreferenceChange");
-
-      if (prop == "true") {
-        print(
-          "Reason we're disabling preference logging for a sec is due to spam",
-          "gray"
-        );
-        setProperty("logPreferenceChange", "false");
-      }
-
-      setProperty(
-        this.propertyName,
-        locketMonsters.map((m) => toInt(m)).join(",")
-      );
-
-      if (prop == "true") {
-        setProperty("logPreferenceChange", prop);
-      }
-
-      if (knownToHave < locketMonsters.length) {
-        setProperty(
-          this.propertyNameKnownToHave,
-          locketMonsters.length.toString()
-        );
-      }
-    } else {
-      locketMonsters = savedLocketMonsters;
-    }
-
-    return locketMonsters;
+    return false;
   }
 
-  makeZoneString(string: String, monsterInfo: MonsterInfo) {
-    let locationsTitle = "";
-    let locations = this.getLocations(monsterInfo.monster);
+  run(parameter: string) {
+    if (parameter == "help") {
+      for (let source of this.locketSources) {
+        let s: string;
 
-    if (locations.length > 0) {
-      let locationsStrings: string[] = locations.map(
-        (l) => this.getFullName(l.zone) + ": " + l
-      );
+        if (source[0].length > 10) {
+          s = "<font color=green>A Location Name</font>";
+        } else {
+          s = source[0]
+            .map((s) => "<font color=green>" + s + "</font>")
+            .join('<font color=blue>", "</font>');
+        }
 
-      locationsTitle = entityEncode(locationsStrings.join(", "));
-    } else {
-      locationsTitle = "No locations found";
-    }
-
-    if (monsterInfo.note.length > 0) {
-      locationsTitle += " ~ Note: " + monsterInfo.note;
-    }
-
-    return (
-      "<font color='gray' title='" + locationsTitle + "'>" + string + "</font>"
-    );
-  }
-
-  getLocations: (monster: Monster) => Location[] = function (
-    monster: Monster
-  ): Location[] {
-    let locations: Location[] = [];
-
-    for (let l of Location.all()) {
-      if (!getMonsters(l).includes(monster)) {
-        continue;
+        printHtml(
+          '<font color=blue>Can do: "</font>' +
+            s +
+            '<font color=blue>" to filter by that group..</font>'
+        );
       }
 
-      locations.push(l);
+      return;
     }
 
-    return locations;
-  };
+    parameter = parameter.trim();
+    let source: string = "file";
+    let limit: number = 10;
+
+    let limitMatch = parameter.match(/(?:(?:\s|^)(\d+)$)|(?:^(\d+)(?:\s|$))/);
+
+    if (limitMatch != null) {
+      if (limitMatch[1] != null) {
+        limit = toInt(limitMatch[1]);
+      } else if (limitMatch[2] != null) {
+        limit = toInt(limitMatch[2]);
+      }
+
+      parameter = parameter.replace(limitMatch[0], "");
+    }
+
+    if (parameter.length > 0) {
+      source = parameter;
+    }
+
+    print("Doing source '" + source + "' and limit " + limit, "gray");
+
+    if (!this.loadData(source)) {
+      return;
+    }
+
+    this.printLocket(limit);
+  }
 
   printLocket(limit: number) {
-    this.loadStuff();
-
-    let wantToGet: MonsterGroup[] = this.monsters;
+    let wantToGet: MonsterGroup[] = this.loader.monsterGroups;
     let alreadyKnow: Monster[] = this.locketMonsters;
-    let knownToHave = toInt(getProperty(this.propertyNameKnownToHave));
+    let knownToHave = toInt(getProperty(LocketUtils.propertyNameKnownToHave));
 
     if (alreadyKnow.length < knownToHave) {
       print(
@@ -538,7 +262,7 @@ class LocketMonsters {
       if (group.groupName == null) {
         for (let monster of group.monsters) {
           printHtml(
-            this.makeZoneString(
+            LocketUtils.makeZoneString(
               monster.monster +
                 (group.groupName != null ? " @ " + group.groupName : ""),
               monster
@@ -546,16 +270,23 @@ class LocketMonsters {
           );
         }
       } else {
-        printHtml(
-          "<font color='blue'>" +
-            group.groupName +
-            ":</font> " +
-            group.monsters
-              .map((monster) =>
-                this.makeZoneString(monster.monster + "", monster)
-              )
-              .join(", ")
-        );
+        for (let i = 0; i < group.monsters.length; i += 100) {
+          let toPrint = group.monsters.slice(
+            i,
+            Math.min(i + 50, group.monsters.length)
+          );
+
+          printHtml(
+            "<font color='blue'>" +
+              (i == 0 ? group.groupName : "Continued") +
+              ":</font> " +
+              toPrint
+                .map((monster) =>
+                  LocketUtils.makeZoneString(monster.monster + "", monster)
+                )
+                .join(", ")
+          );
+        }
       }
 
       if (linesPrinted >= limit && monstersPrinted + 1 < totalUnknown) {
@@ -565,8 +296,10 @@ class LocketMonsters {
 
     if (totalUnknown > monstersPrinted) {
       print(
-        "Skipped " + (totalUnknown - monstersPrinted) + " monsters..",
-        "gray"
+        "There is more! Skipped " +
+          (totalUnknown - monstersPrinted) +
+          " lines..",
+        "red"
       );
     }
 
@@ -578,56 +311,8 @@ class LocketMonsters {
       `You have ${totalKnown} / ${totalToGet}. Including every monster <font title="The data on copyable monsters isn't always accurate.">possible*,</font> you have ${alreadyKnow.length} / ${totalMonsters}`
     );
   }
-
-  getAllZones(): Map<string, Zone> {
-    let zoneMap: Map<string, Zone> = new Map();
-
-    let zoneData: string[] = fileToBuffer("locket_zones.txt").split("\n");
-
-    for (let data of zoneData) {
-      if (data.length == 0 || data.startsWith("#")) {
-        continue;
-      }
-
-      let spl = data.split("\t");
-
-      if (spl.length < 3) {
-        continue;
-      }
-
-      let zone = new Zone();
-      zone.id = spl[0];
-      zone.parentZone = zoneMap.get(spl[1].toLowerCase());
-      zone.name = spl[2];
-
-      if (zone.parentZone != null) {
-        zone.parentZone.children.push(zone);
-      }
-
-      for (let loc of Location.all()) {
-        if (loc.zone != zone.id) {
-          continue;
-        }
-
-        zone.locations.push(loc);
-      }
-
-      zoneMap.set(zone.id.toLowerCase(), zone);
-      zoneMap.set(zone.name.toLowerCase(), zone);
-    }
-
-    return zoneMap;
-  }
 }
 
 export function main(limit: string = "10") {
-  if (limit.match(/^\d+$/) == null) {
-    print(
-      "Please only provide a number to filter how many are displayed, if you want to control what is displayed, look in locket_monsters.txt. This is laziness.",
-      "red"
-    );
-    return;
-  }
-
-  new LocketMonsters().printLocket(toInt(limit));
+  new LocketMonsters().run(limit);
 }
