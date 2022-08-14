@@ -1,25 +1,16 @@
-import { canAdv } from "canadv.ash";
 import {
-  fileToBuffer,
-  getLocketMonsters,
   getProperty,
   print,
-  setProperty,
   toInt,
-  toMonster,
   Monster,
   printHtml,
-  entityEncode,
   Location,
   getMonsters,
-  containsText,
   myLocation,
-  getLocationMonsters,
-  toString,
-  toJson,
+  canAdventure,
 } from "kolmafia";
 import { LocketUtils } from "./LocketUtils";
-import { LocketLoader, MonsterGroup, MonsterInfo } from "./MonsterLoader";
+import { LocketLoader, MonsterGroup } from "./MonsterLoader";
 
 type LocketSource = (filter?: string) => void;
 
@@ -54,7 +45,7 @@ class LocketMonsters {
     this.locketSources.push([
       ["pzone", "parent zone", "parent"],
       () => {
-        let toLoad = myLocation().zone;
+        const toLoad = myLocation().zone;
 
         let zone = LocketUtils.getZones().get(toLoad.toLowerCase());
 
@@ -99,8 +90,8 @@ class LocketMonsters {
     this.locketSources.push([
       ["canadv", "available", "adv"],
       () => {
-        for (let loc of Location.all()) {
-          if (!canAdv(loc)) {
+        for (const loc of Location.all()) {
+          if (!canAdventure(loc)) {
             continue;
           }
 
@@ -126,7 +117,7 @@ class LocketMonsters {
   loadData(origSource: string): boolean {
     const source = origSource.toLowerCase();
 
-    for (let s of this.locketSources) {
+    for (const s of this.locketSources) {
       if (!s[0].includes(source)) {
         continue;
       }
@@ -147,7 +138,7 @@ class LocketMonsters {
 
   run(parameter: string) {
     if (parameter == "help") {
-      for (let source of this.locketSources) {
+      for (const source of this.locketSources) {
         let s: string;
 
         if (source[0].length > 10) {
@@ -172,7 +163,7 @@ class LocketMonsters {
     let source: string = "file";
     let limit: number = 10;
 
-    let limitMatch = parameter.match(/(?:(?:\s|^)(\d+)$)|(?:^(\d+)(?:\s|$))/);
+    const limitMatch = parameter.match(/(?:(?:\s|^)(\d+)$)|(?:^(\d+)(?:\s|$))/);
 
     if (limitMatch != null) {
       if (limitMatch[1] != null) {
@@ -198,9 +189,9 @@ class LocketMonsters {
   }
 
   printLocket(limit: number) {
-    let wantToGet: MonsterGroup[] = this.loader.monsterGroups;
-    let alreadyKnow: Monster[] = this.locketMonsters;
-    let knownToHave = toInt(getProperty(LocketUtils.propertyNameKnownToHave));
+    const wantToGet: MonsterGroup[] = this.loader.monsterGroups;
+    const alreadyKnow: Monster[] = this.locketMonsters;
+    const knownToHave = toInt(getProperty(LocketUtils.propertyNameKnownToHave));
 
     if (alreadyKnow.length < knownToHave) {
       print(
@@ -223,16 +214,16 @@ class LocketMonsters {
       return;
     }
 
-    let totalToGet: number = wantToGet.reduce(
+    const totalToGet: number = wantToGet.reduce(
       (p, v) => p + v.monsters.length,
       0
     );
-    let unknown: MonsterGroup[] = wantToGet
+    const unknown: MonsterGroup[] = wantToGet
       .map((group) => {
-        let g = new MonsterGroup();
+        const g = new MonsterGroup();
         g.groupName = group.groupName;
 
-        for (let m of group.monsters) {
+        for (const m of group.monsters) {
           if (alreadyKnow.includes(m.monster)) {
             continue;
           }
@@ -244,23 +235,23 @@ class LocketMonsters {
       })
       .filter((g) => g.monsters.length > 0);
 
-    let totalUnknown: number = unknown.reduce(
+    const totalUnknown: number = unknown.reduce(
       (p, v) => p + v.monsters.length,
       0
     );
-    let totalKnown: number = totalToGet - totalUnknown;
+    const totalKnown: number = totalToGet - totalUnknown;
 
     let monstersPrinted: number = 0;
     let linesPrinted: number = 0;
 
     print("Hover over the monsters to see locations");
 
-    for (let group of unknown) {
+    for (const group of unknown) {
       monstersPrinted += group.monsters.length;
       linesPrinted++;
 
       if (group.groupName == null) {
-        for (let monster of group.monsters) {
+        for (const monster of group.monsters) {
           printHtml(
             LocketUtils.makeZoneString(
               monster.monster +
@@ -271,7 +262,7 @@ class LocketMonsters {
         }
       } else {
         for (let i = 0; i < group.monsters.length; i += 100) {
-          let toPrint = group.monsters.slice(
+          const toPrint = group.monsters.slice(
             i,
             Math.min(i + 50, group.monsters.length)
           );
@@ -303,7 +294,7 @@ class LocketMonsters {
       );
     }
 
-    let totalMonsters: number = Monster.all().filter(
+    const totalMonsters: number = Monster.all().filter(
       (m) => m.copyable && !m.boss
     ).length;
 
