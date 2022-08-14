@@ -42,8 +42,6 @@ __webpack_require__.d(__webpack_exports__, {
   "main": () => (/* binding */ main)
 });
 
-;// CONCATENATED MODULE: external "canadv.ash"
-const external_canadv_ash_namespaceObject = require("canadv.ash");
 ;// CONCATENATED MODULE: external "kolmafia"
 const external_kolmafia_namespaceObject = require("kolmafia");
 ;// CONCATENATED MODULE: ./src/LocketUtils.ts
@@ -537,7 +535,6 @@ var LocketLoader = /*#__PURE__*/function () {
 ;// CONCATENATED MODULE: ./src/Locket.ts
 function Locket_createForOfIteratorHelper(o, allowArrayLike) {var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];if (!it) {if (Array.isArray(o) || (it = Locket_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {if (it) o = it;var i = 0;var F = function F() {};return { s: F, n: function n() {if (i >= o.length) return { done: true };return { done: false, value: o[i++] };}, e: function e(_e) {throw _e;}, f: F };}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}var normalCompletion = true,didErr = false,err;return { s: function s() {it = it.call(o);}, n: function n() {var step = it.next();normalCompletion = step.done;return step;}, e: function e(_e2) {didErr = true;err = _e2;}, f: function f() {try {if (!normalCompletion && it.return != null) it.return();} finally {if (didErr) throw err;}} };}function Locket_unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return Locket_arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return Locket_arrayLikeToArray(o, minLen);}function Locket_arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function Locket_classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function Locket_defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function Locket_createClass(Constructor, protoProps, staticProps) {if (protoProps) Locket_defineProperties(Constructor.prototype, protoProps);if (staticProps) Locket_defineProperties(Constructor, staticProps);Object.defineProperty(Constructor, "prototype", { writable: false });return Constructor;}function Locket_defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
 
-
 var
 
 
@@ -619,7 +616,7 @@ LocketMonsters = /*#__PURE__*/function () {
     ["canadv", "available", "adv"],
     () => {var _iterator = Locket_createForOfIteratorHelper(
       external_kolmafia_namespaceObject.Location.all()),_step;try {for (_iterator.s(); !(_step = _iterator.n()).done;) {var loc = _step.value;
-          if (!(0,external_canadv_ash_namespaceObject.canAdv)(loc)) {
+          if (!(0,external_kolmafia_namespaceObject.canAdventure)(loc)) {
             continue;
           }
 
