@@ -35,9 +35,9 @@ export class LocketUtils {
   }
 
   static getLocations(monster: Monster): Location[] {
-    let locations: Location[] = [];
+    const locations: Location[] = [];
 
-    for (let l of Location.all()) {
+    for (const l of Location.all()) {
       if (!getMonsters(l).includes(monster)) {
         continue;
       }
@@ -48,12 +48,12 @@ export class LocketUtils {
     return locations;
   }
 
-  static makeZoneString(string: String, monsterInfo: MonsterInfo) {
+  static makeZoneString(string: string, monsterInfo: MonsterInfo) {
     let locationsTitle = "";
-    let locations = this.getLocations(monsterInfo.monster);
+    const locations = this.getLocations(monsterInfo.monster);
 
     if (locations.length > 0) {
-      let locationsStrings: string[] = locations.map(
+      const locationsStrings: string[] = locations.map(
         (l) => this.getFullZoneName(l.zone) + ": " + l
       );
 
@@ -76,7 +76,7 @@ export class LocketUtils {
       return zoneName;
     }
 
-    let zone: Zone = this.getZones().get(zoneName.toLowerCase());
+    const zone: Zone = this.getZones().get(zoneName.toLowerCase());
 
     if (zone == null) {
       return zoneName;
@@ -90,22 +90,22 @@ export class LocketUtils {
   }
 
   static loadAllZones(): Map<string, Zone> {
-    let zoneMap: Map<string, Zone> = new Map();
+    const zoneMap: Map<string, Zone> = new Map();
 
-    let zoneData: string[] = fileToBuffer("locket_zones.txt").split("\n");
+    const zoneData: string[] = fileToBuffer("locket_zones.txt").split("\n");
 
-    for (let data of zoneData) {
+    for (const data of zoneData) {
       if (data.length == 0 || data.startsWith("#")) {
         continue;
       }
 
-      let spl = data.split("\t");
+      const spl = data.split("\t");
 
       if (spl.length < 3) {
         continue;
       }
 
-      let zone = new Zone();
+      const zone = new Zone();
       zone.id = spl[0];
       zone.parentZone = zoneMap.get(spl[1].toLowerCase());
       zone.name = spl[2];
@@ -114,7 +114,7 @@ export class LocketUtils {
         zone.parentZone.children.push(zone);
       }
 
-      for (let loc of Location.all()) {
+      for (const loc of Location.all()) {
         if (loc.zone != zone.id) {
           continue;
         }
@@ -134,10 +134,10 @@ export class LocketUtils {
       Monster.get(m)
     );
 
-    let knownToHave = toInt(getProperty(this.propertyNameKnownToHave));
+    const knownToHave = toInt(getProperty(this.propertyNameKnownToHave));
 
     // Add the fought
-    for (let monster of getProperty("_locketMonstersFought")
+    for (const monster of getProperty("_locketMonstersFought")
       .split(",")
       .filter((m) => m.match(/[0-9]+/))
       .map((m) => toMonster(toInt(m)))) {
@@ -148,12 +148,12 @@ export class LocketUtils {
       locketMonsters.push(monster);
     }
 
-    let savedLocketMonsters: Monster[] = getProperty(this.propertyName)
+    const savedLocketMonsters: Monster[] = getProperty(this.propertyName)
       .split(",")
       .filter((m) => m.match(/[0-9]+/))
       .map((m) => toMonster(toInt(m)));
 
-    for (let m of savedLocketMonsters) {
+    for (const m of savedLocketMonsters) {
       if (locketMonsters.includes(m)) {
         continue;
       }
@@ -162,7 +162,7 @@ export class LocketUtils {
     }
 
     if (locketMonsters.length > savedLocketMonsters.length) {
-      let prop = getProperty("logPreferenceChange");
+      const prop = getProperty("logPreferenceChange");
 
       if (prop == "true") {
         print(

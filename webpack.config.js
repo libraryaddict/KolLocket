@@ -2,7 +2,7 @@ const path = require("path");
 
 module.exports = {
   entry: {
-    locket: "./src/Locket.ts",
+    locket: "./src/Locket.ts"
   },
   mode: "production",
   module: {
@@ -10,23 +10,22 @@ module.exports = {
       {
         // Include ts, tsx, js, and jsx files.
         test: /\.(ts|js)x?$/,
-        loader: "babel-loader",
-      },
-    ],
+        loader: "babel-loader"
+      }
+    ]
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
+    extensions: [".tsx", ".ts", ".js"]
   },
   output: {
     filename: "[name].js",
     path: path.join(__dirname, "./built/scripts/"),
-    libraryTarget: "commonjs",
+    libraryTarget: "commonjs"
   },
   externals: {
-    "canadv.ash": "commonjs canadv.ash",
-    kolmafia: "commonjs kolmafia",
+    kolmafia: "commonjs kolmafia"
   },
   optimization: {
-    minimize: false,
-  },
+    minimize: false
+  }
 };
