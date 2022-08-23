@@ -67,7 +67,11 @@ export class LocketUtils {
     }
 
     return (
-      "<font color='gray' title='" + locationsTitle + "'>" + string + "</font>"
+      "<font color='gray' title=" +
+      entityEncode(locationsTitle) +
+      "'>" +
+      entityEncode(string) +
+      "</font>"
     );
   }
 
