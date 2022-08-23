@@ -102,7 +102,11 @@ var LocketUtils = /*#__PURE__*/function () {function LocketUtils() {_classCallCh
       }
 
       return (
-        "<font color='gray' title='" + locationsTitle + "'>" + string + "</font>");
+        "<font color='gray' title=" +
+        (0,external_kolmafia_namespaceObject.entityEncode)(locationsTitle) +
+        "'>" +
+        (0,external_kolmafia_namespaceObject.entityEncode)(string) +
+        "</font>");
 
     } }, { key: "getFullZoneName", value:
 
@@ -720,18 +724,18 @@ LocketMonsters = /*#__PURE__*/function () {
 
       if (alreadyKnow.length < knownToHave) {
         (0,external_kolmafia_namespaceObject.print)(
-        "This is embarrassing.. Can't pull data on what locket monsters you own!",
+        "This is embarrassing. Can't pull data on what locket monsters you own!",
         "red");
 
 
         if ((0,external_kolmafia_namespaceObject.getProperty)("_locketMonstersFought").split(",").length >= 3) {
           (0,external_kolmafia_namespaceObject.print)(
-          "You have already fought all 3 locket fights, unfortunately this means you can't load the monsters.. Wait for rollover?",
+          "You have already fought all 3 locket fights, unfortunately this means you can't load the monsters. Wait for rollover?",
           "red");
 
         } else {
           (0,external_kolmafia_namespaceObject.print)(
-          "Try visiting the locket remenise page then run this script again!",
+          "Try visiting the locket reminisce page then run this script again!",
           "gray");
 
         }
