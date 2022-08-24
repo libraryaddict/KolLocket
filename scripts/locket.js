@@ -92,7 +92,7 @@ var LocketUtils = /*#__PURE__*/function () {function LocketUtils() {_classCallCh
         (l) => this.getFullZoneName(l.zone) + ": " + l);
 
 
-        locationsTitle = (0,external_kolmafia_namespaceObject.entityEncode)(locationsStrings.join(", "));
+        locationsTitle = locationsStrings.join(", ");
       } else {
         locationsTitle = "No locations found";
       }
@@ -102,7 +102,7 @@ var LocketUtils = /*#__PURE__*/function () {function LocketUtils() {_classCallCh
       }
 
       return (
-        "<font color='gray' title=" +
+        "<font color='gray' title='" +
         (0,external_kolmafia_namespaceObject.entityEncode)(locationsTitle) +
         "'>" +
         (0,external_kolmafia_namespaceObject.entityEncode)(string) +
