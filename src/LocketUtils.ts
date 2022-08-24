@@ -57,7 +57,7 @@ export class LocketUtils {
         (l) => this.getFullZoneName(l.zone) + ": " + l
       );
 
-      locationsTitle = entityEncode(locationsStrings.join(", "));
+      locationsTitle = locationsStrings.join(", ");
     } else {
       locationsTitle = "No locations found";
     }
@@ -67,7 +67,7 @@ export class LocketUtils {
     }
 
     return (
-      "<font color='gray' title=" +
+      "<font color='gray' title='" +
       entityEncode(locationsTitle) +
       "'>" +
       entityEncode(string) +
