@@ -7,7 +7,7 @@ import {
   Location,
   getMonsters,
   myLocation,
-  canAdventure,
+  canAdventure
 } from "kolmafia";
 import { LocketUtils } from "./LocketUtils";
 import { LocketLoader, MonsterGroup } from "./MonsterLoader";
@@ -28,7 +28,7 @@ class LocketMonsters {
       ["file", "data"],
       () => {
         return this.loader.loadDataFile();
-      },
+      }
     ]);
 
     this.locketSources.push([
@@ -39,7 +39,7 @@ class LocketMonsters {
           "Current Zone: ",
           "note"
         );
-      },
+      }
     ]);
 
     this.locketSources.push([
@@ -54,7 +54,7 @@ class LocketMonsters {
         }
 
         return this.loader.loadZone(zone.id, zone.id + ": ", note);
-      },
+      }
     ]);
 
     this.locketSources.push([
@@ -65,7 +65,7 @@ class LocketMonsters {
           myLocation() + " ",
           note
         );
-      },
+      }
     ]);
 
     this.locketSources.push([
@@ -76,7 +76,7 @@ class LocketMonsters {
           "Wanderers: ",
           note
         );
-      },
+      }
     ]);
 
     this.locketSources.push([
@@ -84,7 +84,7 @@ class LocketMonsters {
       () => {
         this.loader.hideNotInLocation = false;
         return this.loader.loadMonsterLocation(null, "All ", note);
-      },
+      }
     ]);
 
     this.locketSources.push([
@@ -97,7 +97,7 @@ class LocketMonsters {
 
           this.loader.loadMonsterLocation(loc, "Can Adv: ", note);
         }
-      },
+      }
     ]);
 
     this.locketSources.push([
@@ -110,7 +110,7 @@ class LocketMonsters {
           Location.get(name) + ": ",
           note
         );
-      },
+      }
     ]);
   }
 
@@ -261,7 +261,7 @@ class LocketMonsters {
           );
         }
       } else {
-        for (let i = 0; i < group.monsters.length; i += 100) {
+        for (let i = 0; i < group.monsters.length; i += 50) {
           const toPrint = group.monsters.slice(
             i,
             Math.min(i + 50, group.monsters.length)
