@@ -7,7 +7,7 @@ import {
   Location,
   getMonsters,
   myLocation,
-  canAdventure
+  canAdventure,
 } from "kolmafia";
 import { LocketUtils } from "./LocketUtils";
 import { LocketLoader, MonsterGroup } from "./MonsterLoader";
@@ -28,7 +28,7 @@ class LocketMonsters {
       ["file", "data"],
       () => {
         return this.loader.loadDataFile();
-      }
+      },
     ]);
 
     this.locketSources.push([
@@ -39,7 +39,7 @@ class LocketMonsters {
           "Current Zone: ",
           "note"
         );
-      }
+      },
     ]);
 
     this.locketSources.push([
@@ -54,7 +54,7 @@ class LocketMonsters {
         }
 
         return this.loader.loadZone(zone.id, zone.id + ": ", note);
-      }
+      },
     ]);
 
     this.locketSources.push([
@@ -65,7 +65,7 @@ class LocketMonsters {
           myLocation() + " ",
           note
         );
-      }
+      },
     ]);
 
     this.locketSources.push([
@@ -76,15 +76,16 @@ class LocketMonsters {
           "Wanderers: ",
           note
         );
-      }
+      },
     ]);
 
     this.locketSources.push([
       ["all", "everything", "*"],
       () => {
         this.loader.hideNotInLocation = false;
+
         return this.loader.loadMonsterLocation(null, "All ", note);
-      }
+      },
     ]);
 
     this.locketSources.push([
@@ -97,7 +98,7 @@ class LocketMonsters {
 
           this.loader.loadMonsterLocation(loc, "Can Adv: ", note);
         }
-      }
+      },
     ]);
 
     this.locketSources.push([
@@ -110,7 +111,7 @@ class LocketMonsters {
           Location.get(name) + ": ",
           note
         );
-      }
+      },
     ]);
   }
 
@@ -123,6 +124,7 @@ class LocketMonsters {
       }
 
       s[1].call(this, source);
+
       return true;
     }
 

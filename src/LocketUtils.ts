@@ -49,26 +49,30 @@ export class LocketUtils {
   }
 
   static makeZoneString(string: string, monsterInfo: MonsterInfo) {
-    let locationsTitle = "";
+    const locationsTitle: string[] = [];
     const locations = this.getLocations(monsterInfo.monster);
+
+    locationsTitle.push(
+      "=-=-=-=-= " + monsterInfo.monster.name + " =-=-=-=-=-="
+    );
 
     if (locations.length > 0) {
       const locationsStrings: string[] = locations.map(
-        (l) => this.getFullZoneName(l.zone) + ": " + l
+        (l) => this.getFullZoneName(l.zone) + " => " + l
       );
 
-      locationsTitle = locationsStrings.join(", ");
+      locationsTitle.push(...locationsStrings);
     } else {
-      locationsTitle = "No locations found";
+      locationsTitle.push("No locations found");
     }
 
     if (monsterInfo.note.length > 0) {
-      locationsTitle += " ~ Note: " + monsterInfo.note;
+      locationsTitle.push("~ Note: " + monsterInfo.note);
     }
 
     return (
       "<font color='gray' title='" +
-      entityEncode(locationsTitle) +
+      locationsTitle.map((s) => entityEncode(s)).join("&#010;") +
       "'>" +
       entityEncode(string) +
       "</font>"

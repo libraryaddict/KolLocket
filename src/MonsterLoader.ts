@@ -6,7 +6,6 @@ import {
   Location,
   print,
   containsText,
-  getLocationMonsters,
   getMonsters,
   appearanceRates,
 } from "kolmafia";
@@ -49,15 +48,15 @@ export class LocketLoader {
   }
 
   loadMonsterZone(zone: Zone, groupName: string, note: string) {
-    let zones: Zone[] = [zone];
+    const zones: Zone[] = [zone];
 
     while (zones.length > 0) {
-      let zone = zones.pop();
+      const zone = zones.pop();
 
       zones.push(...zone.children);
 
-      for (let loc of zone.locations) {
-        let group = new MonsterGroup();
+      for (const loc of zone.locations) {
+        const group = new MonsterGroup();
         group.groupName =
           (groupName || "") + LocketUtils.getFullZoneName(zone.name);
 
@@ -67,7 +66,7 @@ export class LocketLoader {
 
         group.groupName += loc;
 
-        for (let monster of this.getMonsters(loc)) {
+        for (const monster of this.getMonsters(loc)) {
           if (
             this.alreadyProcessed.includes(monster) ||
             !this.isLocketable(monster)
@@ -75,7 +74,7 @@ export class LocketLoader {
             continue;
           }
 
-          let info = new MonsterInfo();
+          const info = new MonsterInfo();
           info.monster = monster;
           info.note = note;
 
@@ -90,15 +89,15 @@ export class LocketLoader {
   }
 
   getInvalidMonsters(): Monster[] {
-    let buffer = fileToBuffer("nowish_monsters.txt").split("\n");
-    let monsters: Monster[] = [];
+    const buffer = fileToBuffer("nowish_monsters.txt").split("\n");
+    const monsters: Monster[] = [];
 
-    for (let line of buffer) {
+    for (const line of buffer) {
       if (line.startsWith("#") || line.length == 0) {
         continue;
       }
 
-      let monster = toMonster(line);
+      const monster = toMonster(line);
 
       monsters.push(monster);
     }
@@ -119,7 +118,7 @@ export class LocketLoader {
   }
 
   loadDataFile() {
-    let buffer = fileToBuffer("locket_monsters.txt");
+    const buffer = fileToBuffer("locket_monsters.txt");
 
     buffer.split(/(\n|\r)+/).forEach((line) => {
       line = line.trim();
@@ -129,16 +128,17 @@ export class LocketLoader {
         return;
       }
 
-      let spl = line.split("\t");
+      const spl = line.split("\t");
       let toLoad = spl[0];
-      let groupName = spl[1];
-      let note = spl[2] || "";
+      const groupName = spl[1];
+      const note = spl[2] || "";
 
       if (
         toLoad.toLowerCase() == "current zone" ||
         toLoad.toLowerCase() == "zone"
       ) {
         this.loadZone(myLocation().zone, groupName, note);
+
         return;
       } else if (toLoad.toLowerCase() == "parent zone") {
         toLoad = myLocation().zone;
@@ -150,9 +150,11 @@ export class LocketLoader {
         }
 
         this.loadZone(zone.id, groupName, note);
+
         return;
       } else if (toLoad.toLowerCase() == "location") {
         this.loadMonsterLocation(myLocation(), groupName, note);
+
         return;
       } else if (
         toLoad.toLowerCase() == "wanderer" ||
@@ -160,18 +162,21 @@ export class LocketLoader {
         toLoad == "none"
       ) {
         this.loadMonsterLocation(Location.get("None"), groupName, note);
+
         return;
       } else if (toLoad == "*" || toLoad == "all") {
         this.loadMonsterLocation(null, groupName, note);
+
         return;
       }
 
       try {
-        let monster: Monster = Monster.get(toLoad);
+        const monster: Monster = Monster.get(toLoad);
 
         this.loadMonsterGroup(monster, groupName, note);
       } catch {
         print("Invalid monster/zone: " + toLoad, "red");
+
         return;
       }
     });
@@ -188,15 +193,15 @@ export class LocketLoader {
   }
 
   loadLocationless(): Monster[] {
-    let monstersFound: Monster[] = [];
+    const monstersFound: Monster[] = [];
 
-    for (let l of Location.all()) {
-      for (let m of this.getMonsters(l)) {
+    for (const l of Location.all()) {
+      for (const m of this.getMonsters(l)) {
         monstersFound.push(m);
       }
     }
 
-    let monsters: Monster[] = Monster.all().filter(
+    const monsters: Monster[] = Monster.all().filter(
       (m) => !monstersFound.includes(m) && this.isLocketable(m)
     );
 
@@ -204,10 +209,10 @@ export class LocketLoader {
   }
 
   loadAllMonsters(groupName: string, note: string) {
-    let group = new MonsterGroup();
+    const group = new MonsterGroup();
     group.groupName = (groupName || "") + "All Monsters";
 
-    for (let monster of Monster.all()) {
+    for (const monster of Monster.all()) {
       if (
         this.alreadyProcessed.includes(monster) ||
         !this.isLocketable(monster)
@@ -215,7 +220,7 @@ export class LocketLoader {
         continue;
       }
 
-      let info = new MonsterInfo();
+      const info = new MonsterInfo();
       info.monster = monster;
       info.note = note;
 
@@ -228,7 +233,7 @@ export class LocketLoader {
   }
 
   loadMonsterLocation(location: Location, groupName: string, note: string) {
-    let group = new MonsterGroup();
+    const group = new MonsterGroup();
     group.groupName =
       (groupName || "") +
       (location == null ? "" : LocketUtils.getFullZoneName(location.zone));
@@ -249,7 +254,7 @@ export class LocketLoader {
       monsters = this.getMonsters(location);
     }
 
-    for (let monster of monsters) {
+    for (const monster of monsters) {
       if (
         this.alreadyProcessed.includes(monster) ||
         !this.isLocketable(monster)
@@ -257,7 +262,7 @@ export class LocketLoader {
         continue;
       }
 
-      let info = new MonsterInfo();
+      const info = new MonsterInfo();
       info.monster = monster;
       info.note = note;
 
@@ -288,25 +293,27 @@ export class LocketLoader {
           monster +
           " in your locket_monsters.txt"
       );
+
       return;
     }
 
-    let monsterInfo = new MonsterInfo();
+    const monsterInfo = new MonsterInfo();
     monsterInfo.monster = monster;
     monsterInfo.note = note;
 
     if (groupName != null) {
-      let group = this.monsterGroups.find(
+      const group = this.monsterGroups.find(
         (group) => group.groupName == groupName
       );
 
       if (group != null) {
         group.monsters.push(monsterInfo);
+
         return;
       }
     }
 
-    let group = new MonsterGroup();
+    const group = new MonsterGroup();
     group.monsters.push(monsterInfo);
     group.groupName = groupName;
 
