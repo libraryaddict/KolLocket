@@ -45,7 +45,7 @@ __webpack_require__.d(__webpack_exports__, {
 ;// CONCATENATED MODULE: external "kolmafia"
 const external_kolmafia_namespaceObject = require("kolmafia");
 ;// CONCATENATED MODULE: ./src/LocketUtils.ts
-function _createForOfIteratorHelper(r, e) {var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];if (!t) {if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) {t && (r = t);var _n = 0,F = function F() {};return { s: F, n: function n() {return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] };}, e: function e(r) {throw r;}, f: F };}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}var o,a = !0,u = !1;return { s: function s() {t = t.call(r);}, n: function n() {var r = t.next();return a = r.done, r;}, e: function e(r) {u = !0, o = r;}, f: function f() {try {a || null == t.return || t.return();} finally {if (u) throw o;}} };}function _unsupportedIterableToArray(r, a) {if (r) {if ("string" == typeof r) return _arrayLikeToArray(r, a);var t = {}.toString.call(r).slice(8, -1);return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0;}}function _arrayLikeToArray(r, a) {(null == a || a > r.length) && (a = r.length);for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];return n;}function _defineProperties(e, r) {for (var t = 0; t < r.length; t++) {var o = r[t];o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o);}}function _createClass(e, r, t) {return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e;}function _classCallCheck(a, n) {if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function");}function _defineProperty(e, r, t) {return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e;}function _toPropertyKey(t) {var i = _toPrimitive(t, "string");return "symbol" == typeof i ? i : i + "";}function _toPrimitive(t, r) {if ("object" != typeof t || !t) return t;var e = t[Symbol.toPrimitive];if (void 0 !== e) {var i = e.call(t, r || "default");if ("object" != typeof i) return i;throw new TypeError("@@toPrimitive must return a primitive value.");}return ("string" === r ? String : Number)(t);}
+function _toConsumableArray(r) {return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _iterableToArray(r) {if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r);}function _arrayWithoutHoles(r) {if (Array.isArray(r)) return _arrayLikeToArray(r);}function _createForOfIteratorHelper(r, e) {var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];if (!t) {if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) {t && (r = t);var _n = 0,F = function F() {};return { s: F, n: function n() {return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] };}, e: function e(r) {throw r;}, f: F };}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}var o,a = !0,u = !1;return { s: function s() {t = t.call(r);}, n: function n() {var r = t.next();return a = r.done, r;}, e: function e(r) {u = !0, o = r;}, f: function f() {try {a || null == t.return || t.return();} finally {if (u) throw o;}} };}function _unsupportedIterableToArray(r, a) {if (r) {if ("string" == typeof r) return _arrayLikeToArray(r, a);var t = {}.toString.call(r).slice(8, -1);return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0;}}function _arrayLikeToArray(r, a) {(null == a || a > r.length) && (a = r.length);for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];return n;}function _defineProperties(e, r) {for (var t = 0; t < r.length; t++) {var o = r[t];o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o);}}function _createClass(e, r, t) {return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e;}function _classCallCheck(a, n) {if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function");}function _defineProperty(e, r, t) {return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e;}function _toPropertyKey(t) {var i = _toPrimitive(t, "string");return "symbol" == typeof i ? i : i + "";}function _toPrimitive(t, r) {if ("object" != typeof t || !t) return t;var e = t[Symbol.toPrimitive];if (void 0 !== e) {var i = e.call(t, r || "default");if ("object" != typeof i) return i;throw new TypeError("@@toPrimitive must return a primitive value.");}return ("string" === r ? String : Number)(t);}
 
 
 var Zone = /*#__PURE__*/_createClass(function Zone() {_classCallCheck(this, Zone);_defineProperty(this, "parentZone", void 0);_defineProperty(this, "children",
@@ -84,26 +84,30 @@ var LocketUtils = /*#__PURE__*/function () {function LocketUtils() {_classCallCh
     } }, { key: "makeZoneString", value:
 
     function makeZoneString(string, monsterInfo) {
-      var locationsTitle = "";
+      var locationsTitle = [];
       var locations = this.getLocations(monsterInfo.monster);
+
+      locationsTitle.push(
+        "=-=-=-=-= " + monsterInfo.monster.name + " =-=-=-=-=-="
+      );
 
       if (locations.length > 0) {
         var locationsStrings = locations.map(
-          (l) => this.getFullZoneName(l.zone) + ": " + l
+          (l) => this.getFullZoneName(l.zone) + " => " + l
         );
 
-        locationsTitle = locationsStrings.join(", ");
+        locationsTitle.push.apply(locationsTitle, _toConsumableArray(locationsStrings));
       } else {
-        locationsTitle = "No locations found";
+        locationsTitle.push("No locations found");
       }
 
       if (monsterInfo.note.length > 0) {
-        locationsTitle += " ~ Note: " + monsterInfo.note;
+        locationsTitle.push("~ Note: " + monsterInfo.note);
       }
 
       return (
         "<font color='gray' title='" +
-        (0,external_kolmafia_namespaceObject.entityEncode)(locationsTitle) +
+        locationsTitle.map((s) => (0,external_kolmafia_namespaceObject.entityEncode)(s)).join("&#010;") +
         "'>" +
         (0,external_kolmafia_namespaceObject.entityEncode)(string) +
         "</font>");
@@ -233,7 +237,7 @@ var LocketUtils = /*#__PURE__*/function () {function LocketUtils() {_classCallCh
       return locketMonsters;
     } }]);}();_defineProperty(LocketUtils, "propertyName", "_locketMonstersSaved");_defineProperty(LocketUtils, "propertyNameKnownToHave", "locketAmountKnownToHave");_defineProperty(LocketUtils, "allZones", void 0);
 ;// CONCATENATED MODULE: ./src/MonsterLoader.ts
-function MonsterLoader_createForOfIteratorHelper(r, e) {var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];if (!t) {if (Array.isArray(r) || (t = MonsterLoader_unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) {t && (r = t);var _n = 0,F = function F() {};return { s: F, n: function n() {return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] };}, e: function e(r) {throw r;}, f: F };}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}var o,a = !0,u = !1;return { s: function s() {t = t.call(r);}, n: function n() {var r = t.next();return a = r.done, r;}, e: function e(r) {u = !0, o = r;}, f: function f() {try {a || null == t.return || t.return();} finally {if (u) throw o;}} };}function _toConsumableArray(r) {return _arrayWithoutHoles(r) || _iterableToArray(r) || MonsterLoader_unsupportedIterableToArray(r) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function MonsterLoader_unsupportedIterableToArray(r, a) {if (r) {if ("string" == typeof r) return MonsterLoader_arrayLikeToArray(r, a);var t = {}.toString.call(r).slice(8, -1);return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? MonsterLoader_arrayLikeToArray(r, a) : void 0;}}function _iterableToArray(r) {if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r);}function _arrayWithoutHoles(r) {if (Array.isArray(r)) return MonsterLoader_arrayLikeToArray(r);}function MonsterLoader_arrayLikeToArray(r, a) {(null == a || a > r.length) && (a = r.length);for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];return n;}function MonsterLoader_defineProperties(e, r) {for (var t = 0; t < r.length; t++) {var o = r[t];o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, MonsterLoader_toPropertyKey(o.key), o);}}function MonsterLoader_createClass(e, r, t) {return r && MonsterLoader_defineProperties(e.prototype, r), t && MonsterLoader_defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e;}function MonsterLoader_classCallCheck(a, n) {if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function");}function MonsterLoader_defineProperty(e, r, t) {return (r = MonsterLoader_toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e;}function MonsterLoader_toPropertyKey(t) {var i = MonsterLoader_toPrimitive(t, "string");return "symbol" == typeof i ? i : i + "";}function MonsterLoader_toPrimitive(t, r) {if ("object" != typeof t || !t) return t;var e = t[Symbol.toPrimitive];if (void 0 !== e) {var i = e.call(t, r || "default");if ("object" != typeof i) return i;throw new TypeError("@@toPrimitive must return a primitive value.");}return ("string" === r ? String : Number)(t);}
+function MonsterLoader_createForOfIteratorHelper(r, e) {var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];if (!t) {if (Array.isArray(r) || (t = MonsterLoader_unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) {t && (r = t);var _n = 0,F = function F() {};return { s: F, n: function n() {return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] };}, e: function e(r) {throw r;}, f: F };}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}var o,a = !0,u = !1;return { s: function s() {t = t.call(r);}, n: function n() {var r = t.next();return a = r.done, r;}, e: function e(r) {u = !0, o = r;}, f: function f() {try {a || null == t.return || t.return();} finally {if (u) throw o;}} };}function MonsterLoader_toConsumableArray(r) {return MonsterLoader_arrayWithoutHoles(r) || MonsterLoader_iterableToArray(r) || MonsterLoader_unsupportedIterableToArray(r) || MonsterLoader_nonIterableSpread();}function MonsterLoader_nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function MonsterLoader_unsupportedIterableToArray(r, a) {if (r) {if ("string" == typeof r) return MonsterLoader_arrayLikeToArray(r, a);var t = {}.toString.call(r).slice(8, -1);return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? MonsterLoader_arrayLikeToArray(r, a) : void 0;}}function MonsterLoader_iterableToArray(r) {if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r);}function MonsterLoader_arrayWithoutHoles(r) {if (Array.isArray(r)) return MonsterLoader_arrayLikeToArray(r);}function MonsterLoader_arrayLikeToArray(r, a) {(null == a || a > r.length) && (a = r.length);for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];return n;}function MonsterLoader_defineProperties(e, r) {for (var t = 0; t < r.length; t++) {var o = r[t];o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, MonsterLoader_toPropertyKey(o.key), o);}}function MonsterLoader_createClass(e, r, t) {return r && MonsterLoader_defineProperties(e.prototype, r), t && MonsterLoader_defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e;}function MonsterLoader_classCallCheck(a, n) {if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function");}function MonsterLoader_defineProperty(e, r, t) {return (r = MonsterLoader_toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e;}function MonsterLoader_toPropertyKey(t) {var i = MonsterLoader_toPrimitive(t, "string");return "symbol" == typeof i ? i : i + "";}function MonsterLoader_toPrimitive(t, r) {if ("object" != typeof t || !t) return t;var e = t[Symbol.toPrimitive];if (void 0 !== e) {var i = e.call(t, r || "default");if ("object" != typeof i) return i;throw new TypeError("@@toPrimitive must return a primitive value.");}return ("string" === r ? String : Number)(t);}
 
 
 var MonsterInfo = /*#__PURE__*/MonsterLoader_createClass(function MonsterInfo() {MonsterLoader_classCallCheck(this, MonsterInfo);MonsterLoader_defineProperty(this, "monster", void 0);MonsterLoader_defineProperty(this, "note", void 0);});
@@ -278,7 +282,7 @@ var LocketLoader = /*#__PURE__*/function () {
       while (zones.length > 0) {
         var _zone = zones.pop();
 
-        zones.push.apply(zones, _toConsumableArray(_zone.children));var _iterator = MonsterLoader_createForOfIteratorHelper(
+        zones.push.apply(zones, MonsterLoader_toConsumableArray(_zone.children));var _iterator = MonsterLoader_createForOfIteratorHelper(
 
             _zone.locations),_step;try {for (_iterator.s(); !(_step = _iterator.n()).done;) {var loc = _step.value;
             var group = new MonsterGroup();
@@ -363,6 +367,7 @@ var LocketLoader = /*#__PURE__*/function () {
         toLoad.toLowerCase() == "zone")
         {
           this.loadZone((0,external_kolmafia_namespaceObject.myLocation)().zone, groupName, note);
+
           return;
         } else if (toLoad.toLowerCase() == "parent zone") {
           toLoad = (0,external_kolmafia_namespaceObject.myLocation)().zone;
@@ -374,9 +379,11 @@ var LocketLoader = /*#__PURE__*/function () {
           }
 
           this.loadZone(zone.id, groupName, note);
+
           return;
         } else if (toLoad.toLowerCase() == "location") {
           this.loadMonsterLocation((0,external_kolmafia_namespaceObject.myLocation)(), groupName, note);
+
           return;
         } else if (
         toLoad.toLowerCase() == "wanderer" ||
@@ -384,9 +391,11 @@ var LocketLoader = /*#__PURE__*/function () {
         toLoad == "none")
         {
           this.loadMonsterLocation(external_kolmafia_namespaceObject.Location.get("None"), groupName, note);
+
           return;
         } else if (toLoad == "*" || toLoad == "all") {
           this.loadMonsterLocation(null, groupName, note);
+
           return;
         }
 
@@ -396,6 +405,7 @@ var LocketLoader = /*#__PURE__*/function () {
           this.loadMonsterGroup(monster, groupName, note);
         } catch (_unused) {
           (0,external_kolmafia_namespaceObject.print)("Invalid monster/zone: " + toLoad, "red");
+
           return;
         }
       });
@@ -512,6 +522,7 @@ var LocketLoader = /*#__PURE__*/function () {
           monster +
           " in your locket_monsters.txt"
         );
+
         return;
       }
 
@@ -526,6 +537,7 @@ var LocketLoader = /*#__PURE__*/function () {
 
         if (_group != null) {
           _group.monsters.push(monsterInfo);
+
           return;
         }
       }
@@ -612,6 +624,7 @@ LocketMonsters = /*#__PURE__*/function () {
     ["all", "everything", "*"],
     () => {
       this.loader.hideNotInLocation = false;
+
       return this.loader.loadMonsterLocation(null, "All ", note);
     }]
     );
@@ -652,6 +665,7 @@ LocketMonsters = /*#__PURE__*/function () {
           }
 
           s[1].call(this, source);
+
           return true;
         }} catch (err) {_iterator2.e(err);} finally {_iterator2.f();}
 
