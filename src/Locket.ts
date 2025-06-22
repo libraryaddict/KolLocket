@@ -213,6 +213,8 @@ class LocketMonsters {
         );
       }
 
+      print("Otherwise use 'set locketAmountKnownToHave=0' to reset the count, this is safe to do.");
+
       return;
     }
 
