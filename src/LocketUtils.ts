@@ -137,12 +137,12 @@ export class LocketUtils {
     return zoneMap;
   }
 
-  static getLocketMonsters() {
-    let locketMonsters: Monster[] = Object.keys(getLocketMonsters()).map((m) =>
-      Monster.get(m)
-    );
-
-    const knownToHave = toInt(getProperty(this.propertyNameKnownToHave));
+  static getMonsters(
+    locketMonsters: Monster[],
+    propertyName: string,
+    propertyNameKnownToHave: string
+  ): Monster[] {
+    const knownToHave = toInt(getProperty(propertyNameKnownToHave));
 
     // Add the fought
     for (const monster of getProperty("_locketMonstersFought")
@@ -156,7 +156,7 @@ export class LocketUtils {
       locketMonsters.push(monster);
     }
 
-    const savedLocketMonsters: Monster[] = getProperty(this.propertyName)
+    const savedLocketMonsters: Monster[] = getProperty(propertyName)
       .split(",")
       .filter((m) => m.match(/[0-9]+/))
       .map((m) => toMonster(toInt(m)));
@@ -180,25 +180,31 @@ export class LocketUtils {
         setProperty("logPreferenceChange", "false");
       }
 
-      setProperty(
-        this.propertyName,
-        locketMonsters.map((m) => toInt(m)).join(",")
-      );
+      setProperty(propertyName, locketMonsters.map((m) => toInt(m)).join(","));
 
       if (prop == "true") {
         setProperty("logPreferenceChange", prop);
       }
 
       if (knownToHave < locketMonsters.length) {
-        setProperty(
-          this.propertyNameKnownToHave,
-          locketMonsters.length.toString()
-        );
+        setProperty(propertyNameKnownToHave, locketMonsters.length.toString());
       }
     } else {
       locketMonsters = savedLocketMonsters;
     }
 
     return locketMonsters;
+  }
+
+  static getLocketMonsters() {
+    const locketMonsters: Monster[] = Object.keys(getLocketMonsters()).map(
+      (m) => Monster.get(m)
+    );
+
+    return this.getMonsters(
+      locketMonsters,
+      this.propertyName,
+      this.propertyNameKnownToHave
+    );
   }
 }

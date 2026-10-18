@@ -193,7 +193,9 @@ class LocketMonsters {
   printLocket(limit: number) {
     const wantToGet: MonsterGroup[] = this.loader.monsterGroups;
     const alreadyKnow: Monster[] = this.locketMonsters;
-    const knownToHave = toInt(getProperty(LocketUtils.propertyNameKnownToHave));
+    const knownToHave = toInt(
+      getProperty(LocketUtils.propertyNameKnownToHave)
+    );
 
     if (alreadyKnow.length < knownToHave) {
       print(

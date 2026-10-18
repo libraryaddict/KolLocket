@@ -1,7 +1,6 @@
 import {
   Monster,
   fileToBuffer,
-  toMonster,
   myLocation,
   Location,
   print,
@@ -22,14 +21,9 @@ export class MonsterGroup {
 }
 
 export class LocketLoader {
-  invalidMonsters: Monster[] = [];
   monsterGroups: MonsterGroup[] = [];
   alreadyProcessed: Monster[] = [];
   hideNotInLocation: boolean = true;
-
-  constructor() {
-    this.invalidMonsters = this.getInvalidMonsters();
-  }
 
   getMonsters(location: Location): Monster[] {
     let result: Monster[];
@@ -86,23 +80,6 @@ export class LocketLoader {
         }
       }
     }
-  }
-
-  getInvalidMonsters(): Monster[] {
-    const buffer = fileToBuffer("nowish_monsters.txt").split("\n");
-    const monsters: Monster[] = [];
-
-    for (const line of buffer) {
-      if (line.startsWith("#") || line.length == 0) {
-        continue;
-      }
-
-      const monster = toMonster(line);
-
-      monsters.push(monster);
-    }
-
-    return monsters;
   }
 
   getZone(zoneName: string): Zone {
@@ -186,9 +163,7 @@ export class LocketLoader {
     return (
       !monster.boss &&
       monster.copyable &&
-      !containsText(monster.attributes, "ULTRARARE") &&
-      !this.invalidMonsters.includes(monster) &&
-      monster.baseHp < 50000 // The health is probably a bad idea, but filters great!
+      !containsText(monster.attributes, "ULTRARARE")
     );
   }
 
@@ -202,7 +177,7 @@ export class LocketLoader {
     }
 
     const monsters: Monster[] = Monster.all().filter(
-      (m) => !monstersFound.includes(m) && this.isLocketable(m)
+      (m) => !monstersFound.includes(m) && this.isLocketable(m),
     );
 
     return monsters;
@@ -280,18 +255,14 @@ export class LocketLoader {
     }
 
     if (!monster.copyable || monster.boss) {
-      print(
-        monster +
-          " is marked as a boss or no-copy, yet is in locket_monsters.txt. Is this a mistake?",
-        "gray"
-      );
+      return;
     }
 
     if (this.alreadyProcessed.includes(monster)) {
       print(
         "You have a duplicate entry for " +
           monster +
-          " in your locket_monsters.txt"
+          " in your locket_monsters.txt",
       );
 
       return;
@@ -303,7 +274,7 @@ export class LocketLoader {
 
     if (groupName != null) {
       const group = this.monsterGroups.find(
-        (group) => group.groupName == groupName
+        (group) => group.groupName == groupName,
       );
 
       if (group != null) {
