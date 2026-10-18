@@ -3,19 +3,15 @@
 module.exports = function (api) {
   api.cache(true);
   return {
-    exclude: [],
     presets: [
-      "@babel/preset-typescript",
       [
         "@babel/preset-env",
         {
-          targets: { rhino: "1.7.13" },
-          corejs: "3.8.0",
+          targets: { rhino: "1.9.1" },
+          modules: false,
         },
       ],
-    ],
-    plugins: [
-      "@babel/plugin-proposal-class-properties"
+      "@babel/preset-typescript",
     ],
     retainLines: true,
     compact: false,

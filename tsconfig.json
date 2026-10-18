@@ -14,12 +14,10 @@
     "strict": false,
     "target": "esnext",
     "useDefineForClassFields": false,
-    "outDir": "../scripts/mine", // Ensure that .d.ts files are created by tsc, but not .js files
-    // Ensure that Babel can safely transpile files in the TypeScript project
+    "noEmit": true,
     "isolatedModules": true,
-    "paths": {
-      "canadv.ash": ["./src/utils/canadv.ash.d.ts"]
-    }
+    "skipLibCheck": true,
+    "types": []
   },
   "include": ["src/**/*.ts"]
 }
