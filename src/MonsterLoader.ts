@@ -163,6 +163,7 @@ export class LocketLoader {
     return (
       !monster.boss &&
       monster.copyable &&
+      monster.id > 0 &&
       !containsText(monster.attributes, "ULTRARARE")
     );
   }
@@ -254,7 +255,7 @@ export class LocketLoader {
       return;
     }
 
-    if (!monster.copyable || monster.boss) {
+    if (!monster.copyable || monster.boss || monster.id < 0) {
       return;
     }
 

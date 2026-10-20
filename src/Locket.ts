@@ -37,7 +37,7 @@ class LocketMonsters {
         return this.loader.loadZone(
           myLocation().zone,
           "Current Zone: ",
-          "note"
+          "note",
         );
       },
     ]);
@@ -63,7 +63,7 @@ class LocketMonsters {
         return this.loader.loadMonsterLocation(
           myLocation(),
           myLocation() + " ",
-          note
+          note,
         );
       },
     ]);
@@ -74,7 +74,7 @@ class LocketMonsters {
         return this.loader.loadMonsterLocation(
           Location.get("None"),
           "Wanderers: ",
-          note
+          note,
         );
       },
     ]);
@@ -109,7 +109,7 @@ class LocketMonsters {
         this.loader.loadMonsterLocation(
           Location.get(name),
           Location.get(name) + ": ",
-          note
+          note,
         );
       },
     ]);
@@ -132,7 +132,7 @@ class LocketMonsters {
       "Unable to find something to load by the name of '" +
         origSource +
         "'. Provide 'help' to get valid filters",
-      "red"
+      "red",
     );
 
     return false;
@@ -154,7 +154,7 @@ class LocketMonsters {
         printHtml(
           '<font color=blue>Can do: "</font>' +
             s +
-            '<font color=blue>" to filter by that group..</font>'
+            '<font color=blue>" to filter by that group..</font>',
         );
       }
 
@@ -193,36 +193,36 @@ class LocketMonsters {
   printLocket(limit: number) {
     const wantToGet: MonsterGroup[] = this.loader.monsterGroups;
     const alreadyKnow: Monster[] = this.locketMonsters;
-    const knownToHave = toInt(
-      getProperty(LocketUtils.propertyNameKnownToHave)
-    );
+    const knownToHave = toInt(getProperty(LocketUtils.propertyNameKnownToHave));
 
     if (alreadyKnow.length < knownToHave) {
       print(
         "This is embarrassing. Can't pull data on what locket monsters you own!",
-        "red"
+        "red",
       );
 
       if (getProperty("_locketMonstersFought").split(",").length >= 3) {
         print(
           "You have already fought all 3 locket fights, unfortunately this means you can't load the monsters. Wait for rollover?",
-          "red"
+          "red",
         );
       } else {
         print(
           "Try visiting the locket reminisce page then run this script again!",
-          "gray"
+          "gray",
         );
       }
 
-      print("Otherwise use 'set locketAmountKnownToHave=0' to reset the count, this is safe to do.");
+      print(
+        "Otherwise use 'set locketAmountKnownToHave=0' to reset the count, this is safe to do.",
+      );
 
       return;
     }
 
     const totalToGet: number = wantToGet.reduce(
       (p, v) => p + v.monsters.length,
-      0
+      0,
     );
     const unknown: MonsterGroup[] = wantToGet
       .map((group) => {
@@ -243,7 +243,7 @@ class LocketMonsters {
 
     const totalUnknown: number = unknown.reduce(
       (p, v) => p + v.monsters.length,
-      0
+      0,
     );
     const totalKnown: number = totalToGet - totalUnknown;
 
@@ -262,15 +262,15 @@ class LocketMonsters {
             LocketUtils.makeZoneString(
               monster.monster +
                 (group.groupName != null ? " @ " + group.groupName : ""),
-              monster
-            )
+              monster,
+            ),
           );
         }
       } else {
         for (let i = 0; i < group.monsters.length; i += 50) {
           const toPrint = group.monsters.slice(
             i,
-            Math.min(i + 50, group.monsters.length)
+            Math.min(i + 50, group.monsters.length),
           );
 
           printHtml(
@@ -279,9 +279,9 @@ class LocketMonsters {
               ":</font> " +
               toPrint
                 .map((monster) =>
-                  LocketUtils.makeZoneString(monster.monster + "", monster)
+                  LocketUtils.makeZoneString(monster.monster + "", monster),
                 )
-                .join(", ")
+                .join(", "),
           );
         }
       }
@@ -296,16 +296,16 @@ class LocketMonsters {
         "There is more! Skipped " +
           (totalUnknown - monstersPrinted) +
           " lines..",
-        "red"
+        "red",
       );
     }
 
     const totalMonsters: number = Monster.all().filter(
-      (m) => m.copyable && !m.boss
+      (m) => m.copyable && !m.boss && m.id > 0,
     ).length;
 
     printHtml(
-      `You have ${totalKnown} / ${totalToGet}. Including every monster <font title="The data on copyable monsters isn't always accurate.">possible*,</font> you have ${alreadyKnow.length} / ${totalMonsters}`
+      `You have ${totalKnown} / ${totalToGet}. Including every monster <font title="The data on copyable monsters isn't always accurate.">possible*,</font> you have ${alreadyKnow.length} / ${totalMonsters}`,
     );
   }
 }
