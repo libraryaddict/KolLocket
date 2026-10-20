@@ -515,7 +515,7 @@ var LocketLoader = /* @__PURE__ */ (function() {
       }
     });
   } }, { key: "isLocketable", value: function isLocketable(monster) {
-    return !monster.boss && monster.copyable && !(0, import_kolmafia2.containsText)(monster.attributes, "ULTRARARE");
+    return !monster.boss && monster.copyable && monster.id > 0 && !(0, import_kolmafia2.containsText)(monster.attributes, "ULTRARARE");
   } }, { key: "loadLocationless", value: function loadLocationless() {
     var monstersFound = [];
     var _iterator3 = _createForOfIteratorHelper2(
@@ -614,7 +614,7 @@ var LocketLoader = /* @__PURE__ */ (function() {
     if (monster == null || monster == import_kolmafia2.Monster.get("None")) {
       return;
     }
-    if (!monster.copyable || monster.boss) {
+    if (!monster.copyable || monster.boss || monster.id < 0) {
       return;
     }
     if (this.alreadyProcessed.includes(monster)) {
@@ -896,9 +896,7 @@ var LocketMonsters = /* @__PURE__ */ (function() {
   } }, { key: "printLocket", value: function printLocket(limit) {
     var wantToGet = this.loader.monsterGroups;
     var alreadyKnow = this.locketMonsters;
-    var knownToHave = (0, import_kolmafia3.toInt)(
-      (0, import_kolmafia3.getProperty)(LocketUtils.propertyNameKnownToHave)
-    );
+    var knownToHave = (0, import_kolmafia3.toInt)((0, import_kolmafia3.getProperty)(LocketUtils.propertyNameKnownToHave));
     if (alreadyKnow.length < knownToHave) {
       (0, import_kolmafia3.print)(
         "This is embarrassing. Can't pull data on what locket monsters you own!",
@@ -915,7 +913,9 @@ var LocketMonsters = /* @__PURE__ */ (function() {
           "gray"
         );
       }
-      (0, import_kolmafia3.print)("Otherwise use 'set locketAmountKnownToHave=0' to reset the count, this is safe to do.");
+      (0, import_kolmafia3.print)(
+        "Otherwise use 'set locketAmountKnownToHave=0' to reset the count, this is safe to do."
+      );
       return;
     }
     var totalToGet = wantToGet.reduce(
@@ -1007,7 +1007,7 @@ var LocketMonsters = /* @__PURE__ */ (function() {
       );
     }
     var totalMonsters = import_kolmafia3.Monster.all().filter(
-      (m) => m.copyable && !m.boss
+      (m) => m.copyable && !m.boss && m.id > 0
     ).length;
     (0, import_kolmafia3.printHtml)(
       `You have ${totalKnown} / ${totalToGet}. Including every monster <font title="The data on copyable monsters isn't always accurate.">possible*,</font> you have ${alreadyKnow.length} / ${totalMonsters}`
